@@ -1,14 +1,49 @@
 ---
-marp: true
-theme: default
-paginate: true
-header: "第五週：利用 JavaScript 產生動態效果"
-footer: "網頁設計基礎 | 世新大學"
-style: |
-  section {
-    font-family: 'Noto Sans TC', sans-serif;
-  }
+puppeteer:
+  displayHeaderFooter: true
+  scale: 1.15
+  headerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第五週：利用 JavaScript 產生動態效果</div>'
+  footerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第 <span class="pageNumber"></span> 頁 / 共 <span class="totalPages"></span> 頁</div>'
+  margin:
+    top: "1.5cm"
+    bottom: "1.5cm"
+    left: "1.5cm"
+    right: "1.5cm"
 ---
+
+<style>
+  /* 全域字型、字級與行距 */
+  body {
+    font-size: 16pt !important;
+    line-height: 1.7 !important;
+    font-family: "Microsoft JhengHei", "PingFang TC", "Helvetica Neue", sans-serif;
+  }
+
+  /* 階層標題微調 */
+  h1 { font-size: 30pt !important; margin-bottom: 0.5em !important; }
+  h2 { font-size: 24pt !important; page-break-before: always; }
+  h3 { font-size: 20pt !important; }
+  h4 { font-size: 18pt !important; }
+
+  /* 表格文字放大與排版優化 */
+  table, th, td {
+    font-size: 15pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* 程式碼區塊 (自動換行防止 PDF 截斷) */
+  pre, code {
+    font-size: 13pt !important;
+    font-family: Consolas, "Courier New", monospace !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+  }
+
+  /* Mermaid 流程圖節點字體放大 */
+  .mermaid text {
+    font-size: 14px !important;
+  }
+</style>
 
 # 第五週：利用 JavaScript 產生動態效果 (JavaScript Basics & DOM Manipulation)
 
