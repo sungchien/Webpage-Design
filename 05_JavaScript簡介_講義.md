@@ -80,7 +80,7 @@ flowchart TD
 ```
 
 > 💡 **老師的真心話**  
-> 在 DOM 的世界裡，每一個 HTML 標籤都被瀏覽器封裝成一個**「物件 (Object)」**。  
+> 在 DOM 的世界裡，每一個 HTML 標籤都被瀏覽器封裝成一個 **「物件 (Object)」** 。  
 > 物件會擁有：  
 > 1. **屬性 (Property)**：物件擁有的資訊或狀態，例如 `innerHTML` (裡面的文字或標籤)、`src` (圖片路徑)、`style.color` (文字顏色)。  
 > 2. **方法 (Method)**：可以對物件執行的「動作」，例如 `document.getElementById()` (用 ID 搜尋元素)。
@@ -208,14 +208,14 @@ p2.style.backgroundColor = "#f0f3f4"; // 變更背景顏色
 ```
 
 > 💡 **老師的真心話**  
-> * **關於寫法規範**：在 CSS 中我們寫 `font-size` 或 `background-color`（有連字號 `-`）；但在 JavaScript 中要改成小寫開頭、大寫相連的**「駝峰式命名法 (Camel Case)」**，例如 `fontSize` 與 `backgroundColor`！  
+> * **關於寫法規範**：在 CSS 中我們寫 `font-size` 或 `background-color`（有連字號 `-`）；但在 JavaScript 中要改成小寫開頭、大寫相連的 **「駝峰式命名法 (Camel Case)」** ，例如 `fontSize` 與 `backgroundColor`！  
 > * **效能與維護提示**：雖然直接寫 `style` 很方便，但如果要修改的樣式很多，業界最佳實踐是先在 CSS 寫好一個 Class（例如 `.dark-mode`），再用 JavaScript 去切換 Class，程式碼會更乾淨喔！
 
 ---
 
 ## Ⅳ. 事件驅動 (Events) 讓網頁活起來
 
-如果說前面學的是「如何改變」，那麼事件 (Events) 要教的就是**「什麼時候改變」**。
+如果說前面學的是「如何改變」，那麼事件 (Events) 要教的就是 **「什麼時候改變」** 。
 
 「事件」就是使用者在網頁上發生的各種動作（如點擊、滑鼠移入、按鍵按下）。JavaScript 就像警衛一樣，隨時監聽這些事件，一旦觸發就執行對應的指令。
 
