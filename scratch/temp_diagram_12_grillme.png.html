@@ -1,0 +1,161 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px;
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    display: inline-block;
+  }
+  .container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px 40px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.05);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1100px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 16px;
+  }
+  .header-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+  }
+  .header-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .card {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .card.highlight {
+    background: #f0fdf4;
+    border-color: #86efac;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.12);
+  }
+  .card.primary {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
+  }
+  .card.purple {
+    background: #faf5ff;
+    border-color: #d8b4fe;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.12);
+  }
+  .card.amber {
+    background: #fffbeb;
+    border-color: #fde68a;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
+  }
+  .card-tag {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    width: fit-content;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .card-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13.5px;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 4px;
+  }
+</style></head><body>
+<div class="container" style="width: 1000px;">
+  <div class="header">
+    <div class="header-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);">🎤</div>
+    <div>
+      <div class="header-title">`/grill-me` 蘇格拉底式需求訪談循序流程</div>
+      <div class="header-subtitle">化被動為主動：AI 擔任嚴格產品總監，為你補齊設計盲點</div>
+    </div>
+  </div>
+  <div class="flow-row">
+    <div class="card primary">
+      <div class="card-tag" style="background: #dbeafe; color: #1e40af;">步驟 1：啟動訪談</div>
+      <div class="card-title">學生下達指令</div>
+      <div class="card-desc">
+        輸入 <code>/grill-me</code><br>
+        「我想做老王咖啡形象官網，請透過深度提問幫我理清思路並產出 PRD。」
+      </div>
+    </div>
+    <div class="arrow">➔</div>
+    <div class="card purple">
+      <div class="card-tag" style="background: #f3e8ff; color: #6b21a8;">步驟 2：深度發問</div>
+      <div class="card-title">AI 連續追問痛點</div>
+      <div class="card-desc">
+        • TA 是上班族還是學生？<br>
+        • 最自豪的招牌是什麼？<br>
+        • 想要哪 3 種主要色調？<br>
+        • 顧客最關鍵的 CTA 是什麼？
+      </div>
+    </div>
+    <div class="arrow">➔</div>
+    <div class="card highlight">
+      <div class="card-tag" style="background: #dcfce7; color: #15803d;">步驟 3：一鍵固化</div>
+      <div class="card-title">寫入 PRD.md 檔案</div>
+      <div class="card-desc">
+        「請根據訪談紀錄整理成標準 PRD 並建立檔案！」<br>
+        Agent 直接呼叫工具，在專案根目錄產生 <code>PRD.md</code>！
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

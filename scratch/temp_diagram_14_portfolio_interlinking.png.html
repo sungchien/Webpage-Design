@@ -1,0 +1,152 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px;
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    display: inline-block;
+  }
+  .container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px 40px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.05);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1100px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 16px;
+  }
+  .header-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+  }
+  .header-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .card {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .card.highlight {
+    background: #f0fdf4;
+    border-color: #86efac;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.12);
+  }
+  .card.primary {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
+  }
+  .card.purple {
+    background: #faf5ff;
+    border-color: #d8b4fe;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.12);
+  }
+  .card.amber {
+    background: #fffbeb;
+    border-color: #fde68a;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
+  }
+  .card-tag {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    width: fit-content;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .card-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13.5px;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 4px;
+  }
+</style></head><body>
+<div class="container" style="width: 980px;">
+  <div class="header">
+    <div class="header-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">🔗</div>
+    <div>
+      <div class="header-title">雙向作品集生態系串聯 (Portfolio Interlinking)</div>
+      <div class="header-subtitle">建立多專案互聯網絡，展現全方位數位創作能力</div>
+    </div>
+  </div>
+  <div class="flow-row">
+    <div class="card primary">
+      <div class="card-tag" style="background: #dbeafe; color: #1e40af;">網站 A：個人履歷首頁</div>
+      <div class="card-title"><code>your-username.github.io</code></div>
+      <div class="card-desc">
+        <strong>任務一：加入專案卡片</strong><br>
+        在履歷的「作品集區塊」中，新增前往新官網的精美卡片連結：<br>
+        <code>👉 前往瀏覽老王咖啡官網</code>
+      </div>
+    </div>
+    <div class="arrow" style="font-size: 32px;">⇄</div>
+    <div class="card highlight">
+      <div class="card-tag" style="background: #dcfce7; color: #15803d;">網站 B：新 AI 形象專案</div>
+      <div class="card-title"><code>.../my-vibe-cafe/</code></div>
+      <div class="card-desc">
+        <strong>任務二：頁尾連回履歷</strong><br>
+        在官網頁尾 <code>&lt;footer&gt;</code> 加上作者品牌署名：<br>
+        <code>Designed by &lt;a href="履歷網址"&gt;你的名字&lt;/a&gt;</code>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

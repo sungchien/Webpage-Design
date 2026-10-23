@@ -2,7 +2,7 @@
 puppeteer:
   displayHeaderFooter: true
   scale: 1.15
-  headerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第十一週：實作專案四 — AI 協作：Vibe Coding 觀念重塑與 Antigravity 2.0 上手</div>'
+  headerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第十一週：實作專案四 — AI 協作：Vibe Coding 工具上手與專案工作區建立</div>'
   footerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第 <span class="pageNumber"></span> 頁 / 共 <span class="totalPages"></span> 頁</div>'
   margin:
     top: "1.5cm"
@@ -38,185 +38,220 @@ puppeteer:
     white-space: pre-wrap !important;
     word-break: break-all !important;
   }
-
-  /* Mermaid 流程圖節點字體放大 */
-  .mermaid text {
-    font-size: 14px !important;
-  }
 </style>
 
 ---
 
-# 第十一週：實作專案四 — AI 協作：Vibe Coding 觀念重塑與 Antigravity 2.0 上手 (Orientation & Workspace Setup)
+# 第十一週：實作專案四 — AI 協作：Vibe Coding 工具上手與多頁專案起手式 (Orientation & Multi-page Setup)
 
 **課程名稱**：網頁設計 (Webpage Design)  
 **授課教師**：林頌堅 副教授 (Prof. Sung-Chien Lin)  
 **授課單位**：世新大學 資訊傳播學系  
-**聯絡方式**：scl@mail.shu.edu.tw  
-**核心工具**：Google Antigravity 2.0 Desktop、GitHub Desktop、VS Code  
-**課堂時間**：共 80 分鐘（雙節課：40 min + 40 min）  
+**必備工具**：Google Antigravity 2.0 Desktop、GitHub Desktop、VS Code、Google Chrome / Edge  
 
 ---
 
-## Ⅰ. 專案背景：從手刻編碼到 Agentic Vibe Coding (Evolution of Web Development)
+## Ⅰ. 學習目標與心態重塑：你不再是「碼農」，而是「AI 產品總監」
 
-各位同學好！
+各位同學好！在前半學期中，我們學習了用 HTML 刻畫結構、用 CSS 雕琢樣式，並用 GitHub Pages 上線了自己的線上個人履歷。
 
-恭喜大家順利完成了前幾週的「線上個人履歷」專案，並且成功使用 Git 與 GitHub Pages 將自己的作品發佈到了全世界！在過去的學習中，我們學習了如何「一磚一瓦」地用 HTML 定義網頁骨架、用 CSS 雕琢樣式排版，並透過 JavaScript 增加基礎的互動效果。
+這週開始，我們要跨入目前全球最火紅的開發模式 —— **Vibe Coding（氛圍編程）**。
 
-現在，我們將正式跨入網頁開發的全新紀元 —— **AI Agent 協作開發**。
-
-```mermaid
-flowchart LR
-    subgraph Traditional["傳統開發時代 (2022 以前)"]
-        A1["手刻每行代碼"] --> A2["手動排版排錯"] --> A3["手動部署發布"]
-    end
-    subgraph ChatLLM["對話式 AI 時代 (2023 - 2024)"]
-        B1["向 ChatGPT/Gemini 提問"] --> B2["複製貼上代碼區塊"] --> B3["在編輯器手動拼湊"]
-    end
-    subgraph AgenticVibe["Agentic Vibe Coding (2025+)"]
-        C1["撰寫 PRD 需求藍圖"] --> C2["Antigravity 2.0 審查規劃"] --> C3["AI 代理直接讀寫本地檔案並生成素材"]
-    end
-    Traditional -.-> ChatLLM -.-> AgenticVibe
-```
+![網頁開發模式演進：從純手刻到 Agentic Vibe Coding](img/diagram_11_evolution.png)
 
 ### 1. 什麼是 Vibe Coding？
-「Vibe Coding」（氛圍編程）是當前軟體界最受矚目的開發範式。它的核心哲學是：**你不再需要被動地逐行打字，而是扮演「產品經理 (Product Manager)」與「技術品管師 (QA Inspector)」，透過清晰的願景、精確的氛圍描述與架構引導，指揮 AI 代理人（AI Agent）為你完成程式碼的實作與迭代。**
+過去寫多個網頁，你必須手動建立 `index.html`、`about.html`、`menu.html`，一個個複製貼上導覽列與樣式，稍不注意連結就失效了。  
+在 **Vibe Coding** 的世界裡：
+* **你扮演「產品總監 (PM)」與「技術品管 (QA)」**：負責定義網站願景、規劃各頁面架構、挑選視覺氛圍（Vibe），並檢查成品細節。
+* **AI Agent（Antigravity 2.0 Desktop）扮演你的「初階工程團隊」**：負責直接在你的電腦資料夾建立多個網頁、編寫代碼、生成真實圖片素材，並聽從你的指示精確修改。
 
-### 2. 為什麼我們要升級到 Antigravity 2.0 Desktop？
-在過去，許多人使用 ChatGPT 或 Gemini 網頁版來寫網頁，但往往會陷入痛苦的瓶頸：
-- **「複製貼上地獄 (Copy-Paste Hell)」**：AI 在網頁聊天框印出 500 行代碼，你得自己複製、開 VS Code、存檔；改一個小地方，又得重新覆蓋整份檔案。
-- **上下文遺失與失憶**：網頁版聊天室不知道你本地資料夾裡有哪些圖片、CSS 檔案或歷史紀錄。
-- **假字與假圖氾濫**：AI 只能給你不著邊際的 `Lorem Ipsum` 假文和失效的假圖片連結，缺乏真實質感。
-
-**Google Antigravity 2.0 Desktop** 是一套 AI-First 的桌面級 Agent 開發平台。它徹底解決了上述斷裂問題：
-1. **直接讀寫本地工作區 (Direct Workspace File Access)**：AI 直接在你的專案資料夾建立、修改、重構檔案，零複製貼上。
-2. **結構化工件系統 (Interactive Artifacts)**：AI 會在編碼前產出完整的實作計畫書（`implementation_plan.md`）與架構圖，完成後自動交付走查報告（`walkthrough.md`）。
-3. **視覺化代碼變更審查 (Visual Diff Overlays)**：以清楚的紅/綠色標註修改範圍，讓學生精準掌握 AI 的每一步改動。
-4. **多模態素材生成 (Built-in Image Generation)**：內建圖像生成工具，能根據你的風格氛圍直接產出高質感的真實圖片素材並存入專案。
-5. **整合終端機指令**：一鍵啟動本地預覽伺服器、自動執行 Git 指令。
-
-> 💡 **老師的真心話**  
-> 以前我們是花 80% 時間「寫」程式碼，花 20% 時間「規劃」；  
-> 現在，你必須花 60% 時間「規劃藍圖 (PRD)」、花 10% 時間「指揮 AI 代理」、花 30% 時間「品管審查與細節微調」。  
-> 記住：**AI 不會通靈，Garbage In 就必定 Garbage Out！** 你的價值不在於打字速度，而在於你對產品目標的精確描述與品味把關！
+### 2. 你的黃金時間分配法則
+* **60% 時間「規劃藍圖」**：想清楚網站有哪些頁面、要放什麼、給誰看（寫好 PRD）。
+* **10% 時間「指揮 AI」**：用精準、具體的自然語言引導 AI 動工。
+* **30% 時間「品管審查」**：檢查頁面連結是否正常、手機版排版是否跑版、細節微調。
 
 ---
 
-## Ⅱ. 工具對比：網頁對話式 AI vs. Antigravity 2.0 桌面代理 (Tool Comparison)
+## Ⅱ. 工具對比：為什麼我們不用網頁版 ChatGPT/Gemini？
 
-| 評比維度 | 傳統網頁 AI (ChatGPT / Gemini Web) | Antigravity 2.0 Desktop 代理平台 | 對學生的實質效益 |
-| :--- | :--- | :--- | :--- |
-| **檔案操作** | 只能在聊天視窗輸出文字區塊，學生須手動全選、複製、貼上到檔案中。 | **直接讀寫工作區**：AI 代理自動建立 `index.html`、`style.css` 並精準局部替換。 | 告別「複製貼上覆蓋失誤」，節省 70% 雜務時間。 |
-| **專案感知** | 無法讀取本地資料夾目錄結構與多個檔案關聯。 | **全專案上下文感知**：使用 `@` 即可引用專案中的任意檔案、圖片或設定。 | AI 能理解整個網站架構，不再瞎子摸象。 |
-| **需求企劃** | 學生面對空白文檔發呆，缺乏專業引導；或直接丟一句話導致 AI 生成芭樂範本。 | **`/grill-me` 互動訪談 + 多模態草圖輸入**：AI 化身產品總監主動提問，並能看懂手繪草圖。 | 徹底解決學生「不知如何描述」的痛點，消除模糊盲區。 |
-| **架構規劃** | 一股腦直接輸出大量程式碼，容易漏掉需求或產生幻覺。 | **Planning Mode 規範模式**：先產出 **Artifact (`implementation_plan.md`)**，學生確認後才動工。 | 培養先思考後動手的工程思維，掌控 Single Source of Truth。 |
-| **代碼審查** | 學生無法看清到底改了哪幾行，只能盲目相信 AI。 | **視覺化 Diff 比對**：綠色新增、紅色刪除，清楚列出具體變更。 | 強化 HTML/CSS 專業閱讀與品管審查能力。 |
-| **圖片素材** | 只能提供佔位圖 (Placeholder) 或無效連結。 | **內建多模態生成 (`generate_image`)**：直接產出符合主題氛圍的真實高品質圖片。 | 網站完成即具備商業質感，無須額外到處找圖。 |
-| **預覽與測試** | 須自行開 Live Server 或手動開瀏覽器重整除錯。 | **內建終端機環境**：可直接下指令開啟本地伺服器測試，並整合 Git 發布。 | 打造專業的一站式現代化開發工作流程。 |
+很多同學問：「老師，我用瀏覽器開 ChatGPT 或 Gemini 寫網頁不行嗎？」
+
+| 比較項目 | 傳統網頁 AI (ChatGPT / Gemini Web) | 桌面端 AI 代理 (Antigravity 2.0 Desktop) |
+| :--- | :--- | :--- |
+| **多網頁處理** | 痛苦！AI 每次只印一個檔案，你要手動開 4 個分頁反覆複製貼上。 | **一次搞定**！AI 直接在本地資料夾自動建立並關聯所有網頁檔案。 |
+| **檔案感知** | 瞎子摸象！它看不到你電腦裡有哪些圖片與 CSS 檔案。 | **全域感知**！直接掛載你的專案目錄，看得懂所有檔案的相互關聯。 |
+| **圖片素材** | 只能給你失效的佔位假圖 (`via.placeholder.com`)。 | **內建繪圖**！直接呼叫 `generate_image` 為你畫出高質感真實商用圖。 |
+| **代碼修改** | 改一個字就重新印出 500 行，很容易貼錯位置。 | **精準替換**！支援 Visual Diff，清清楚楚顯示它修改了哪幾行代碼。 |
 
 ---
 
-## Ⅲ. 專案五週整體進度規劃 (Weeks 11-15 Overview)
+## Ⅲ. 實戰任務一：用 GitHub Desktop 建立多頁專案資料夾 (Project Setup)
 
-本專案採循序漸進的五週節奏進行，每週 80 分鐘（雙節課）：
+為了讓未來的專案管理與發布最省力，我們採取**「先建倉庫，再開 Antigravity」**的標準流程：
 
-```mermaid
-timeline
-    title 實作專案四：Agentic Vibe Coding 五週里程碑 (每週 80 分鐘)
-    第 11 週 : 觀念重塑與工具上手 : GitHub Desktop 建立新 Repository : Antigravity 2.0 掛載工作區與破冰實作
-    第 12 週 : Phase 1 企劃與架構 : /grill-me 訪談與手繪草圖輸入 : 撰寫 PRD.md 並生成 implementation_plan 工件 : 同儕審查互評
-    第 13 週 : Phase 2 生成與素材 : 批准動工與工作區檔案自動生成 : generate_image 製作高質感主題圖片 : 閱讀 Visual Diff 代碼變更
-    第 14 週 : Phase 3 品管與微調 : 檢視 walkthrough 工件 : 本地伺服器預覽與跨裝置 RWD 測試 : Vibe QA 精確自然語言微調
-    第 15 週 : 上線發表與講評 : GitHub Desktop Push 發布至 GitHub Pages : 雙向串聯個人履歷作品集 : 課堂成果發表與評審回饋
+![核心工作流程基石：GitHub Desktop 專案初始化與 Antigravity 串聯](img/diagram_11_setup.png)
+
+### 🛠️ 操作步驟：
+1. **打開 GitHub Desktop**。
+2. 點擊頂部選單的 **`File > New repository...`**（新增儲存庫）。
+3. 填寫專案設定：
+   * **Name**：請使用英文小寫與減號，例如 `laowang-cafe`、`guitar-club` 或 `portfolio-2026`（這個名稱未來會變成你的網址一部分！）。
+   * **Local Path**：選擇你電腦中熟悉的資料夾（例如 `Documents/GitHub`）。
+   * **其他選項**：不要勾選 "Initialize this repository with a README"。
+4. 點擊 **`Create repository`** 按鈕。此時你的電腦硬碟中已經建立了一個乾淨、具備完整 Git 版本控制的專案目錄！
+
+---
+
+## Ⅳ. 實戰任務二：在 Antigravity 2.0 Desktop 中掛載專案工作區
+
+現在，我們要讓 AI 結對工程師進入你的專案目錄。
+
+### 🛠️ 操作步驟：
+1. 打開 **Antigravity 2.0 Desktop** 桌面應用程式。
+2. 在左側欄點擊 **`Projects`**，選擇 **`Open Project`**（或從檔案選單開啟資料夾）。
+3. 選擇剛剛由 GitHub Desktop 建立的那個資料夾（例如 `laowang-cafe`）。
+4. **認識主介面三大核心區域**：
+   * **左側/中央聊天畫布 (Chat Canvas)**：你向 AI 下達指令、討論需求、審查代碼的核心對話窗。
+   * **右側工件視窗 (Artifacts Pane)**：AI 交付的設計文件（`implementation_plan.md`、`walkthrough.md`）會以精美的互動頁面呈現在這裡。
+   * **底部終端機 (Terminal)**：AI 會在這裡幫你啟動本機預覽伺服器、執行 Git 指令。
+
+---
+
+## Ⅴ. 實戰任務三：破冰體驗 — 見證「零複製貼上」的神奇建檔
+
+讓我們用一段簡單的指令，親自體會 AI 代理人直接在你的硬碟寫入檔案的威力！
+
+### 💬 請在 Antigravity 對話框中輸入以下提示詞：
+
+```text
+請直接在我的專案目錄中建立一個 hello.html 檔案：
+1. 包含完整的 HTML5 骨架與繁體中文語系設定。
+2. 畫面中央放一張粉彩漸層卡片，上面有一顆精美的發光按鈕，標題寫「Antigravity 破冰成功！」。
+3. 寫一段簡單的 JavaScript，讓每次點擊按鈕時，按鈕下方會顯示點擊次數與一句隨機的鼓勵小語。
+4. 建立完成後，請告訴我檔案已建立。
 ```
 
+### 🔍 觀察與自我檢核 (Self-Check)：
+1. **觀察 Antigravity**：對話框中會跳出工具呼叫提示（`write_to_file`），AI 直接將代碼寫入你的硬碟。
+2. **切換到 GitHub Desktop**：看一下左側的 **"Changes"** 列表，你會發現 `hello.html` 已經自動出現，右側清楚顯示所有新增的綠色代碼！
+3. **在瀏覽器打開**：到你的專案資料夾中雙擊 `hello.html`，在瀏覽器裡點點看按鈕，確認互動功能是否正常！
+
+> 💡 **這就是 Vibe Coding 的核心魅力**：你不用在視窗之間複製貼上代碼，你動口，AI 動手！
+
 ---
 
-## Ⅳ. 核心工作流程基石：GitHub Desktop 專案初始化與 Antigravity 串聯 (Project Setup)
+## Ⅵ. 實戰任務四：指揮 AI 執行 Git 提交與推送到雲端，並在線上觀察結果
 
-在第 11 週進入 Phase 1 之前，**強烈建議採取「先在 GitHub Desktop 建立 Repository，再用 Antigravity 掛載」的標準流程**：
+當 AI 幫你寫好程式碼後，你甚至不需要手動點擊按鈕，直接用自然語言就能指揮它完成版本提交與雲端推送！
 
-```mermaid
-flowchart LR
-    A["步驟 1：打開 GitHub Desktop"] --> B["點擊 File > New repository<br>(例如：my-vibe-cafe)"]
-    B --> C["本機自動建立 Git 專案目錄<br>(包含 .git 隱藏設定)"]
-    C --> D["步驟 2：打開 Antigravity 2.0 Desktop"]
-    D --> E["點擊 Open Project 掛載該資料夾"]
-    E --> F["雙螢幕/雙視窗工作流：<br>Antigravity 寫扣 ⇄ GitHub Desktop 即時追蹤變更"]
+![Antigravity 操作 GitHub 的三種層次](img/diagram_11_git_levels.png)
+
+### 1. 指揮 Antigravity 進行 Commit 與 Push
+請在 Antigravity 對話框中輸入：
+
+```text
+請在終端機幫我將目前的檔案加入 Git 暫存並進行 Commit：
+- Commit 訊息請寫：「初次建立專案環境並完成破冰 hello.html」
+- 請在終端機執行 git status 讓我確認狀態。
+- 若已經關聯遠端倉庫，請順便幫我執行 git push 推送到雲端！
 ```
 
-### 為什麼這套「專案前置初始化」是最佳教學實務？
-1. **銜接舊知識，降低認知負擔**：同學們在第 7~9 週已經學過 GitHub Desktop，延續這個熟悉的工具能給學生強烈的安全感。
-2. **自動 Git 初始化（Zero Config Git）**：透過 GitHub Desktop 建立資料夾，會自動完成 `git init`，建立好乾淨的目錄，避免學生在「桌面」或「下載」等雜亂路徑下開專案。
-3. **即時視覺同步回饋（Visual Feedback）**：當 Antigravity 在工作區中新增或修改任何檔案時，GitHub Desktop 的 **"Changes"** 列表會**「零秒差」**跳出變更！學生可以一邊看 AI 在 Antigravity 動手，一邊看 GitHub Desktop 的綠色代碼新增，極大地強化學習的安心感與可控感。
+> 📌 **初次發布小提醒**：如果你的專案剛在 GitHub Desktop 建立尚未推上雲端，你也可以直接切換到 GitHub Desktop，點擊頂部的 **「Publish repository」**（**務必取消勾選「Keep this code private」**，確保為公開儲存庫）。
+
+### 2. 在 GitHub.com 網站查看上傳結果
+推送完畢後，讓我們到雲端驗收成果：
+1. 打開瀏覽器，造訪你的 GitHub 個人主頁：`https://github.com/你的帳號/你的專案名稱`  
+   （在 GitHub Desktop 也可以按下快捷鍵 `Ctrl + Shift + G`，或點選頂部選單 `Repository > View on GitHub` 快速開啟）。
+2. 在網頁的檔案清單中，你會驚喜地發現 `hello.html` 已經穩穩躺在雲端倉庫中！
+3. 檔案旁邊清清楚楚記錄著你剛才由 AI 提交的 Commit 訊息：「初次建立專案環境並完成破冰 hello.html」，以及精確的提交時間。
+
+### 3. 開啟 GitHub Pages 並從專屬網址觀察生成結果
+既然檔案已經上傳雲端，我們就能讓全世界看到這個破冰網頁：
+1. 在該 GitHub 倉庫頁面，點擊頂部的 **`Settings`**（設定）。
+2. 在左側選單點選 **`Pages`**。
+3. 在 **Build and deployment** 下方：
+   * **Source** 選擇 `Deploy from a branch`。
+   * **Branch** 選擇 `main`，路徑保持 `/(root)`，點擊 **`Save`**。
+4. 等待 1~2 分鐘後重新整理頁面，頂部會跳出綠色勾勾與專屬網址：  
+   `https://<你的GitHub帳號>.github.io/<專案名稱>/hello.html`
+5. 用瀏覽器打開這個網址（甚至可以用手機掃描或開啟），親眼見證自己剛才用嘴巴指揮 AI 寫出的互動網頁，已經真正發布到全網！
 
 ---
 
-## Ⅴ. Antigravity 如何操作 GitHub？指令、終端與 MCP 工具解析 (Git & GitHub Integration)
+## Ⅶ. 實戰任務五：體驗 Vibe Coding 迭代循環 — 再次修改、推送與觀察更新 (The Iterative Loop)
 
-很多同學好奇：**Antigravity 能不能像自動寫檔案一樣，幫我操作 GitHub 或 GitHub Desktop？**
+網頁開發最迷人的精髓就在於**「快速迭代 (Iterative Refinement)」**。  
+現在讓我們親手跑一次完整的 **「修改 ➔ Commit ➔ Push ➔ 觀察線上更新」** 循環！
 
-答案是：**完全可以！Antigravity 具備強大的終端機指令與 MCP（Model Context Protocol）生態系支援！**
+### 步驟 1：向 Antigravity 下達修改指令（升級網頁特效）
+請在 Antigravity 對話框中輸入：
 
-```mermaid
-flowchart TD
-    subgraph AntigravityCore["Antigravity 2.0 核心能力"]
-        Terminal["內建終端機 (Terminal Commands)"]
-        MCP["MCP 擴充協議 (Model Context Protocol)"]
-    end
-
-    subgraph Operations["操作 GitHub 的三種層次"]
-        Level1["【層次 1：直接執行標準 Git 指令】<br>git status / git add . / git commit / git push<br>(⭐ 課堂最推薦：免設定、最穩健)"]
-        Level2["【層次 2：GitHub CLI (gh 指令)】<br>gh repo create / gh issue list / gh pr create"]
-        Level3["【層次 3：官方 GitHub MCP Server】<br>@modelcontextprotocol/server-github<br>免開瀏覽器，API 直接操作倉庫、分支與推送"]
-    end
-
-    Terminal --> Level1
-    Terminal --> Level2
-    MCP --> Level3
+```text
+請幫我修改 hello.html，進行第二版升級：
+1. 將原本的按鈕升級為吸睛的紫粉漸層色彩，並加上 hover:scale-105 與 hover:shadow-lg 的平滑懸浮放大動畫。
+2. 在按鈕下方增加一行小字：「⚡ 由 Antigravity 2.0 桌面代理人自動迭代生成」。
+3. 在卡片右上角增加一個小開關按鈕，點擊後可以在「淺色米白」與「深色夜間」兩種背景模式之間切換！
 ```
 
-### 1. 概念澄清：GitHub Desktop vs. Git
-* **GitHub Desktop** 是 GitHub 官方開發的**圖形化介面軟體 (GUI)**，專門用滑鼠點擊操作，本身並不提供外部 API 讓 AI 遙控它的視窗。
-* 但是，GitHub Desktop 背後的核心就是 **Git**！因此，**當 Antigravity 在終端機執行 Git 指令、或在工作區修改檔案時，GitHub Desktop 會即時感知並完全同步！**
+### 步驟 2：觀察 Visual Diff 並在本地即時驗證
+1. **查看 Visual Diff**：AI 執行修改時，觀察聊天視窗顯示的代碼差異，看看綠色新增了哪些 Tailwind class 與 JavaScript 切換邏輯。
+2. **本地刷新確認**：回桌面雙擊 `hello.html`（或重新整理已開啟的瀏覽器標籤頁），試按切換夜間模式與動態按鈕，體驗親手主導產品升級的快感！
 
-### 2. Antigravity 操作 GitHub 的實用方式
-* **終端機標準 Git 指令（免任何額外設定，課堂最強烈推薦）**：  
-  學生只需在 Antigravity 對話框中用口語要求：
-  ```text
-  請幫我將目前的修改進行 Git 提交，commit 訊息寫「初次建立專案環境」，並推送到 GitHub 遠端倉庫。
-  ```
-  Antigravity 會自動在背景執行 `git add .`、`git commit -m "..."` 與 `git push`。打開旁邊的 GitHub Desktop，紀錄便已同步推上雲端！
+### 步驟 3：指揮 AI 再次提交並推送到 GitHub
+在 Antigravity 對話框中輸入：
 
----
+```text
+修改效果非常棒！請在終端機幫我執行 git add . 與 git commit，
+- Commit 訊息寫：「升級 hello.html：加入漸層懸浮特效與深淺色切換功能」
+- 提交完成後，直接幫我執行 git push 推送到 GitHub 雲端！
+```
 
-## Ⅵ. 第十一週課堂 80 分鐘實作節奏與破冰練習 (Classroom Lab & Icebreaker)
-
-### 課堂時間分配表 (40 min × 2)
-* **第 1 節 (40 分鐘)：觀念重塑與專案初始化**
-  1. 解說 Vibe Coding 演進與 60/10/30 時間法則 (15 min)。
-  2. 開啟 GitHub Desktop，點擊 `File > New repository`，命名為 `my-vibe-project`，路徑設為熟悉資料夾（如 `Documents/GitHub`）(15 min)。
-  3. 打開 Antigravity 2.0 Desktop，點擊左側 `Projects > Open Project` 掛載剛才建立的資料夾 (10 min)。
-* **第 2 節 (40 分鐘)：Antigravity 介面巡禮與零複製貼上破冰體驗**
-  1. 認識主畫布、右側 Artifacts 窗格、與下方終端機 (15 min)。
-  2. **破冰實作（零複製貼上震撼體驗）** (20 min)：
-     在 Antigravity 輸入：
-     ```text
-     請直接在我的專案目錄建立一個 hello.html 檔案，裡面放一個置中的發光粉彩按鈕，按鈕上寫「點我計數」，並加入一段簡單的 JavaScript 讓它每次點擊都會累加次數。
-     ```
-     觀察檔案瞬間出現在左側檔案樹，切換到 GitHub Desktop 觀察 Changes 列表即時亮出綠色代碼！
-  3. 預告下週專案自選主題，思考你想為誰做網站 (5 min)。
+### 步驟 4：在 GitHub.com 與線上網址觀察修改成果
+1. **回到 GitHub.com 倉庫頁面**：重新整理，你會看到最新的 Commit 紀錄已經更新為「升級 hello.html：加入漸層懸浮特效...」，點擊 Commit 紀錄還能看到精確的代碼修改記錄。
+2. **重新整理 GitHub Pages 線上網址**：  
+   打開 `https://<你的GitHub帳號>.github.io/<專案名稱>/hello.html`  
+   （若瀏覽器有暫存快取，請按下鍵盤 **`Ctrl + F5`** 進行強制重新整理）。  
+3. 看見線上網頁瞬間換上你剛才要求的深色模式與粉紫按鈕！**這就是專業工程師每天在使用的持續發布 (Continuous Deployment) 流程！**
 
 ---
 
-## Ⅶ. 專案主題自選範圍 (Project Topics)
+## Ⅷ. 本週課後任務：自選你的「多網頁形象網站」主題
 
-請在課後思考並挑選一個你感興趣的主題，下週我們將正式進入 Phase 1 企劃撰寫：
-1. **社團招生官網**（例如：世新吉他社、熱舞社、登山隊、攝影社）
-2. **校園或文藝活動宣傳頁**（例如：2026 校慶音樂祭、迎新營隊、資傳系成果展）
-3. **地方小型企業 / 特色店面**（例如：老王手沖咖啡、巷口手作甜點店、個人烘焙坊）
-4. **個人高質感作品集**（例如：攝影作品集、UI/UX 設計展示、影音創作集錦）
+下週我們將正式啟動 **Phase 1 企劃階段**，請在課後挑選一個你最有興趣、最想為它做官網的主題。這個網站必須規劃為 **包含 3 ~ 4 個互相跳轉網頁的完整網站**！
 
-> 💡 **老師的真心話**  
-> 記住，從今天開始，你不再是機械式敲打鍵盤的「碼農」，而是手握強大 AI 代理人團隊的「AI 產品總監」！請帶上你的品味與想像力，我們下週進入 Phase 1 企劃見！
+### 推薦主題與頁面規劃參考：
+
+1. **巷弄特色手沖咖啡廳（如：老王手沖咖啡）**
+   * 首頁 (`index.html`)：全寬主視覺、最新公告、人氣推薦
+   * 關於我們 (`about.html`)：主理人烘豆理念、空間氛圍介紹
+   * 風味菜單 (`menu.html`)：手沖單品、義式咖啡、手作甜點價格列表
+   * 店家資訊 (`contact.html`)：營業時間、交通指南、Google Map 嵌入
+2. **大學熱門社團招生官網（如：世新吉他社）**
+   * 首頁 (`index.html`)：熱血招生 Hero Banner、社團大合照、近期演出
+   * 社團介紹 (`about.html`)：社團歷史、指導老師與幹部團隊
+   * 活動歷程 (`events.html`)：迎新露營、期末成果發表、歷年演出影音
+   * 加入我們 (`join.html`)：入社常見問答 (FAQ)、報名表單連結
+3. **個人高質感作品集（個人數位名片）**
+   * 首頁 (`index.html`)：個人簡介、精選主打作品卡片
+   * 經歷與專長 (`about.html`)：求學經歷、技能徽章、自傳
+   * 作品展示 (`portfolio.html`)：影音創作、平面設計、UI/UX 專案詳細列表
+   * 聯絡我 (`contact.html`)：社群連結 (IG/LinkedIn)、Email 聯絡表單
+
+---
+
+## Ⅸ. 本週驗收檢核清單 (Week 11 Checklist)
+
+在關閉電腦前，請確認你已達成以下 6 大里程碑：
+- [ ] 已在 GitHub Desktop 建立一個乾淨且公開的專案倉庫資料夾。
+- [ ] 已在 Antigravity 2.0 Desktop 中掛載該專案資料夾。
+- [ ] 已成功讓 AI 自動生成初版 `hello.html`，並在瀏覽器驗證按鈕點擊功能。
+- [ ] 已在 GitHub.com 網站上看見推送上傳的檔案與 Commit 訊息。
+- [ ] 已開啟 GitHub Pages，並能透過專屬公開網址連上 `hello.html`。
+- [ ] 已成功完成**二次修改（迭代循環）**，透過 Git Push 更新雲端，並在線上網址看到最新修改結果！
+- [ ] 心中已決定好下週要做的主題，並初步想好要包含哪 3~4 個頁面！
+
+---
+
+> 💡 **產品總監結語**  
+> 今天你已經完整體驗了現代工程師最核心的「編程 ➔ 提交 ➔ 發布 ➔ 迭代」閉環！  
+> 下週我們將正式跨入大專案的靈魂 —— **Phase 1 企劃篇**。我們將使用 `/grill-me` 指令，像專業 PM 一樣雕琢多頁網站的 PRD 藍圖！
