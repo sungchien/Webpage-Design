@@ -87,7 +87,7 @@ puppeteer:
 
 ## Ⅲ. 實戰任務一：用 GitHub Desktop 建立多頁專案資料夾 (Project Setup)
 
-為了讓未來的專案管理與發布最省力，我們採取**「先建倉庫，再開 Antigravity」**的標準流程：
+為了讓未來的專案管理與發布最省力，我們採取 **「先建倉庫，再開 Antigravity」** 的標準流程：
 
 ![核心工作流程基石：GitHub Desktop 專案初始化與 Antigravity 串聯](img/diagram_11_setup.png)
 
@@ -98,7 +98,11 @@ puppeteer:
    * **Name**：請使用英文小寫與減號，例如 `laowang-cafe`、`guitar-club` 或 `portfolio-2026`（這個名稱未來會變成你的網址一部分！）。
    * **Local Path**：選擇你電腦中熟悉的資料夾（例如 `Documents/GitHub`）。
    * **其他選項**：不要勾選 "Initialize this repository with a README"。
-4. 點擊 **`Create repository`** 按鈕。此時你的電腦硬碟中已經建立了一個乾淨、具備完整 Git 版本控制的專案目錄！
+4. 點擊 **`Create repository`** 按鈕。此時你的電腦硬碟中已經建立了一個乾淨、具備完整 Git 版本控制的本機專案目錄！
+5. **點擊「Publish repository」發布到 GitHub 雲端並設為公開**：
+   * 點擊 GitHub Desktop 主畫面上方的藍色按鈕 **`Publish repository`**。
+   * 彈出設定視窗中，**🚨 極度關鍵步驟：請務必取消勾選「Keep this code private」！**
+   * 點擊視窗中的 **`Publish Repository`** 按鈕。此時 GitHub 雲端便已同步建立好這個公開儲存庫，本機與雲端正式無縫串聯！
 
 ---
 
@@ -108,8 +112,8 @@ puppeteer:
 
 ### 🛠️ 操作步驟：
 1. 打開 **Antigravity 2.0 Desktop** 桌面應用程式。
-2. 在左側欄點擊 **`Projects`**，選擇 **`Open Project`**（或從檔案選單開啟資料夾）。
-3. 選擇剛剛由 GitHub Desktop 建立的那個資料夾（例如 `laowang-cafe`）。
+2. 在左側欄點擊 **`Projects`**，選擇 **`Create Project`**（建立專案工作區）。
+3. 選擇剛剛由 GitHub Desktop 建立並發布的那個本機資料夾（例如 `laowang-cafe`），完成專案掛載。
 4. **認識主介面三大核心區域**：
    * **左側/中央聊天畫布 (Chat Canvas)**：你向 AI 下達指令、討論需求、審查代碼的核心對話窗。
    * **右側工件視窗 (Artifacts Pane)**：AI 交付的設計文件（`implementation_plan.md`、`walkthrough.md`）會以精美的互動頁面呈現在這裡。
@@ -132,7 +136,7 @@ puppeteer:
 ```
 
 ### 🔍 觀察與自我檢核 (Self-Check)：
-1. **觀察 Antigravity**：對話框中會跳出工具呼叫提示（`write_to_file`），AI 直接將代碼寫入你的硬碟。
+1. **觀察 Antigravity 的自主建檔**：對話框中會跳出工具呼叫卡片（顯示為 `write_file` 正在建立 `hello.html`），AI 直接將代碼寫入你的硬碟。
 2. **切換到 GitHub Desktop**：看一下左側的 **"Changes"** 列表，你會發現 `hello.html` 已經自動出現，右側清楚顯示所有新增的綠色代碼！
 3. **在瀏覽器打開**：到你的專案資料夾中雙擊 `hello.html`，在瀏覽器裡點點看按鈕，確認互動功能是否正常！
 
@@ -147,16 +151,14 @@ puppeteer:
 ![Antigravity 操作 GitHub 的三種層次](img/diagram_11_git_levels.png)
 
 ### 1. 指揮 Antigravity 進行 Commit 與 Push
-請在 Antigravity 對話框中輸入：
+因為我們在實戰任務一中已經在 GitHub Desktop 完成了初始 `Publish repository`，本機與遠端倉庫早已綁定！現在只要在 Antigravity 對話框中輸入：
 
 ```text
 請在終端機幫我將目前的檔案加入 Git 暫存並進行 Commit：
 - Commit 訊息請寫：「初次建立專案環境並完成破冰 hello.html」
 - 請在終端機執行 git status 讓我確認狀態。
-- 若已經關聯遠端倉庫，請順便幫我執行 git push 推送到雲端！
+- 提交完成後，直接幫我執行 git push 推送到 GitHub 雲端！
 ```
-
-> 📌 **初次發布小提醒**：如果你的專案剛在 GitHub Desktop 建立尚未推上雲端，你也可以直接切換到 GitHub Desktop，點擊頂部的 **「Publish repository」**（**務必取消勾選「Keep this code private」**，確保為公開儲存庫）。
 
 ### 2. 在 GitHub.com 網站查看上傳結果
 推送完畢後，讓我們到雲端驗收成果：
@@ -175,6 +177,20 @@ puppeteer:
 4. 等待 1~2 分鐘後重新整理頁面，頂部會跳出綠色勾勾與專屬網址：  
    `https://<你的GitHub帳號>.github.io/<專案名稱>/hello.html`
 5. 用瀏覽器打開這個網址（甚至可以用手機掃描或開啟），親眼見證自己剛才用嘴巴指揮 AI 寫出的互動網頁，已經真正發布到全網！
+
+### 4. 觀念釐清：本機雙擊打開 vs. GitHub Pages 線上網址有何本質差異？
+
+很多同學會好奇：「在實戰任務三中，我直接在電腦資料夾雙擊 `hello.html` 就能看到網頁，那為什麼還要推送到 GitHub 並開啟 GitHub Pages 呢？」
+
+這兩者在網路架構與實務應用上有著根本的差異：
+
+| 比較面向 | 本機檔案直接雙擊開啟 (`file:///`) | GitHub Pages 線上專屬網址 (`https://`) |
+| :--- | :--- | :--- |
+| **運作協定** | **本機檔案協定 (File Protocol)**<br>網址開頭為 `file:///C:/Users/.../hello.html` | **網路傳輸協定 (HTTP / HTTPS)**<br>網址開頭為 `https://帳號.github.io/專案/hello.html` |
+| **誰能瀏覽？** | **只有當前這台電腦看得到**。<br>（若把這串 `file:///` 網址複製傳給別人，在任何其他裝置上都無法打開）。 | **全世界任何連上網路的人都能瀏覽**！<br>（用手機、平板或傳送給面試官，隨時隨地皆可點閱）。 |
+| **伺服器託管** | **無伺服器託管**。<br>純粹由作業系統直接將硬碟檔案交付瀏覽器本機渲染。 | **具備專業 Web Server 全球託管**。<br>由 GitHub 雲端伺服器 24 小時不中斷提供網路服務。 |
+| **瀏覽器相容與安全性** | 受到瀏覽器嚴格安全沙盒限制 (CORS 跨來源限制)，**外部自訂字型 (Google Fonts)、跨頁相對跳轉或 JavaScript 資料載入極易報錯或失效**。 | **標準網際網路環境**，外部字體庫、多媒體資源、CSS 動畫與跨頁導覽皆能完美順暢執行。 |
+| **作品集價值** | 僅為本機開發暫存測試，無法對外展現。 | **真正的個人數位資產**！可正式放置於個人履歷、社群簡介中作為實戰代表作。 |
 
 ---
 

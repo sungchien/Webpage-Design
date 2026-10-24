@@ -293,7 +293,7 @@ PRD 完成後，先不要急著動工！我們需要透過同儕互評與 AI 規
 * **Q1：AI 寫出來的 PRD 只有單頁，完全忘記我要做 4 個分頁怎麼辦？**  
   👉 **解答**：請直接對它說：「請注意！本專案為『4 個獨立 HTML 頁面的多頁式網站』，不是單頁滾動網站！請重新修改 PRD.md 的第 4 節，明確列出 index.html、about.html、menu.html、contact.html 各自獨立的內容規格。」
 * **Q2：點擊 Antigravity 產出的檔案，它說存檔失敗？**  
-  👉 **解答**：請確認你是否在 Antigravity 中正確開啟專案資料夾（Open Project），而不是只開了單一檔案。只要掛載的是根目錄，AI 就能自由讀寫本地檔案。
+  👉 **解答**：請確認你是否在 Antigravity 中正確掛載專案資料夾（Create Project），而不是只開了單一檔案。只要掛載的是根目錄，AI 就能自由讀寫本地檔案。
 * **Q3：AI 在 Planning Mode 一直想要偷跑動手寫 HTML 怎麼辦？**  
   👉 **解答**：在提示詞開頭嚴正強調：「現在是規劃階段，請停留在 Planning 模式，不要呼叫 write_to_file 建立 HTML，請專注完善 implementation_plan.md 工件！」
 
