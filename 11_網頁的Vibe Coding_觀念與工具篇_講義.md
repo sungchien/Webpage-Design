@@ -99,9 +99,15 @@ puppeteer:
    * **Local Path**：選擇你電腦中熟悉的資料夾（例如 `Documents/GitHub`）。
    * **其他選項**：不要勾選 "Initialize this repository with a README"。
 4. 點擊 **`Create repository`** 按鈕。此時你的電腦硬碟中已經建立了一個乾淨、具備完整 Git 版本控制的本機專案目錄！
+
+![GitHub Create repository](img/2026-10-24-09-34-04.png)
+
 5. **點擊「Publish repository」發布到 GitHub 雲端並設為公開**：
    * 點擊 GitHub Desktop 主畫面上方的藍色按鈕 **`Publish repository`**。
    * 彈出設定視窗中，**🚨 極度關鍵步驟：請務必取消勾選「Keep this code private」！**
+
+   ![unselecting private](img/2026-10-24-09-37-30.png)
+
    * 點擊視窗中的 **`Publish Repository`** 按鈕。此時 GitHub 雲端便已同步建立好這個公開儲存庫，本機與雲端正式無縫串聯！
 
 ---
@@ -113,11 +119,17 @@ puppeteer:
 ### 🛠️ 操作步驟：
 1. 打開 **Antigravity 2.0 Desktop** 桌面應用程式。
 2. 在左側欄點擊 **`Projects`**，選擇 **`Create Project`**（建立專案工作區）。
-3. 選擇剛剛由 GitHub Desktop 建立並發布的那個本機資料夾（例如 `laowang-cafe`），完成專案掛載。
+![Antigravity Create Project](img/2026-10-24-10-06-23.png)
+
+3. 選擇剛剛由 GitHub Desktop 建立並發布的那個本機資料夾（例如 `portfolio-2026`），完成專案掛載。
+![Antigravity Project](img/2026-10-24-10-08-23.png)
+
 4. **認識主介面三大核心區域**：
    * **左側/中央聊天畫布 (Chat Canvas)**：你向 AI 下達指令、討論需求、審查代碼的核心對話窗。
    * **右側工件視窗 (Artifacts Pane)**：AI 交付的設計文件（`implementation_plan.md`、`walkthrough.md`）會以精美的互動頁面呈現在這裡。
    * **底部終端機 (Terminal)**：AI 會在這裡幫你啟動本機預覽伺服器、執行 Git 指令。
+
+   ![Antigravity User Interface](img/2026-10-24-10-26-07.png)
 
 ---
 
@@ -135,10 +147,16 @@ puppeteer:
 4. 建立完成後，請告訴我檔案已建立。
 ```
 
+![hello.html](img/2026-10-24-10-32-47.png)
+
 ### 🔍 觀察與自我檢核 (Self-Check)：
-1. **觀察 Antigravity 的自主建檔**：對話框中會跳出工具呼叫卡片（顯示為 `write_file` 正在建立 `hello.html`），AI 直接將代碼寫入你的硬碟。
+1. **觀察 Antigravity 的自主建檔**：AI 在對話框中回覆已為你建立好檔案，代碼直接寫入本機硬碟中；在左側檔案樹（File Explorer）中也立即出現了 `hello.html`！
 2. **切換到 GitHub Desktop**：看一下左側的 **"Changes"** 列表，你會發現 `hello.html` 已經自動出現，右側清楚顯示所有新增的綠色代碼！
 3. **在瀏覽器打開**：到你的專案資料夾中雙擊 `hello.html`，在瀏覽器裡點點看按鈕，確認互動功能是否正常！
+
+![antigravity hello.html](img/2026-10-24-11-22-35.png)
+
+![local hello.html](img/2026-10-24-11-23-29.png)
 
 > 💡 **這就是 Vibe Coding 的核心魅力**：你不用在視窗之間複製貼上代碼，你動口，AI 動手！
 
@@ -154,11 +172,23 @@ puppeteer:
 因為我們在實戰任務一中已經在 GitHub Desktop 完成了初始 `Publish repository`，本機與遠端倉庫早已綁定！現在只要在 Antigravity 對話框中輸入：
 
 ```text
-請在終端機幫我將目前的檔案加入 Git 暫存並進行 Commit：
-- Commit 訊息請寫：「初次建立專案環境並完成破冰 hello.html」
-- 請在終端機執行 git status 讓我確認狀態。
-- 提交完成後，直接幫我執行 git push 推送到 GitHub 雲端！
+請在終端機幫我將目前的檔案加入 Git 暫存並進行 Commit，接著推送到 GitHub 雲端：
+1. 執行 git add .
+2. 執行 git commit -m "初次建立專案環境並完成破冰 hello.html"
+3. 執行 git push
+4. 最後執行 git status 讓我確認狀態。
 ```
+
+![Git Command](img/2026-10-24-11-38-26.png)
+
+> ⚠️ **踩坑急救包：如果終端機顯示 `Your branch is ahead of 'origin/main' by 1 commit` 怎麼辦？**  
+> 在執行這類指令時，AI 有時會提早停在 `git status`，顯示：  
+> `Your branch is ahead of 'origin/main' by 1 commit. (use "git push" to publish your local commits)`  
+> 這代表本地 Commit 已經成功存檔，但尚未完成最後一步推送。  
+> **👉 解法非常簡單（善用 AI 自我修復）**：  
+> 直接在對話框再對 Antigravity 說一句：  
+> 💬 **「終端機顯示尚未推送，請自行修復並執行 git push 完成推送！」**  
+> AI 就會立刻在背景終端機執行 `git push`，把進度穩穩送上 GitHub！
 
 ### 2. 在 GitHub.com 網站查看上傳結果
 推送完畢後，讓我們到雲端驗收成果：
@@ -167,6 +197,8 @@ puppeteer:
 2. 在網頁的檔案清單中，你會驚喜地發現 `hello.html` 已經穩穩躺在雲端倉庫中！
 3. 檔案旁邊清清楚楚記錄著你剛才由 AI 提交的 Commit 訊息：「初次建立專案環境並完成破冰 hello.html」，以及精確的提交時間。
 
+![github.com repository](img/2026-10-24-11-52-53.png)
+
 ### 3. 開啟 GitHub Pages 並從專屬網址觀察生成結果
 既然檔案已經上傳雲端，我們就能讓全世界看到這個破冰網頁：
 1. 在該 GitHub 倉庫頁面，點擊頂部的 **`Settings`**（設定）。
@@ -174,9 +206,13 @@ puppeteer:
 3. 在 **Build and deployment** 下方：
    * **Source** 選擇 `Deploy from a branch`。
    * **Branch** 選擇 `main`，路徑保持 `/(root)`，點擊 **`Save`**。
+
+![Repository Settings](img/2026-10-24-12-01-32.png)
+
 4. 等待 1~2 分鐘後重新整理頁面，頂部會跳出綠色勾勾與專屬網址：  
    `https://<你的GitHub帳號>.github.io/<專案名稱>/hello.html`
 5. 用瀏覽器打開這個網址（甚至可以用手機掃描或開啟），親眼見證自己剛才用嘴巴指揮 AI 寫出的互動網頁，已經真正發布到全網！
+![hello.html online](img/2026-10-24-12-07-26.png)
 
 ### 4. 觀念釐清：本機雙擊打開 vs. GitHub Pages 線上網址有何本質差異？
 
@@ -211,7 +247,14 @@ puppeteer:
 
 ### 步驟 2：觀察 Visual Diff 並在本地即時驗證
 1. **查看 Visual Diff**：AI 執行修改時，觀察聊天視窗顯示的代碼差異，看看綠色新增了哪些 Tailwind class 與 JavaScript 切換邏輯。
+
+![visual diff](img/2026-10-24-12-40-14.png)
+
+![GitHub Desktop](img/2026-10-24-12-38-30.png)
+
 2. **本地刷新確認**：回桌面雙擊 `hello.html`（或重新整理已開啟的瀏覽器標籤頁），試按切換夜間模式與動態按鈕，體驗親手主導產品升級的快感！
+
+![hello.html v2](img/2026-10-24-12-36-46.png)
 
 ### 步驟 3：指揮 AI 再次提交並推送到 GitHub
 在 Antigravity 對話框中輸入：
@@ -224,10 +267,15 @@ puppeteer:
 
 ### 步驟 4：在 GitHub.com 與線上網址觀察修改成果
 1. **回到 GitHub.com 倉庫頁面**：重新整理，你會看到最新的 Commit 紀錄已經更新為「升級 hello.html：加入漸層懸浮特效...」，點擊 Commit 紀錄還能看到精確的代碼修改記錄。
+
+![GitHub hello.html v2](img/2026-10-24-12-47-26.png)
+
 2. **重新整理 GitHub Pages 線上網址**：  
    打開 `https://<你的GitHub帳號>.github.io/<專案名稱>/hello.html`  
    （若瀏覽器有暫存快取，請按下鍵盤 **`Ctrl + F5`** 進行強制重新整理）。  
 3. 看見線上網頁瞬間換上你剛才要求的深色模式與粉紫按鈕！**這就是專業工程師每天在使用的持續發布 (Continuous Deployment) 流程！**
+
+![hello.html v2 online](img/2026-10-24-12-49-01.png)
 
 ---
 
