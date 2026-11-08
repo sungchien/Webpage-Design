@@ -207,6 +207,7 @@ tags:
 - 過多留白
 - 只有一兩行文字
 - 大量碎片化條列
+- 單一自然段或 `>` 引言區塊字數過於龐大（超過約 150～200 字時，應依語意轉折適度分段；若在 `>` 區塊內分段，段落間空行必須保留 `>` 符號）
 
 ---
 
@@ -229,6 +230,8 @@ tags:
 - 程式碼前先說明目的。
 - 程式碼後說明重要內容。
 - 不要只貼程式碼而沒有解釋。
+- 長篇程式碼、範本或提示詞區塊超過約 35～40 行時，應依功能或章節切分為多個子區塊（例如 `Part 1`、`Part 2`），避免單一 `<pre>` 橫跨多頁並在匯出 PDF 時被截斷。
+- 提示詞或文字區塊中的長條列項目（超過約 120～150 字）應改為結構化縮排子項目；純敘事句中切勿隨意插入手動硬換行（`\n`），以免折出只有 2～3 字的孤立短尾行。
 
 ---
 
@@ -255,6 +258,184 @@ tags:
 
 ---
 
+## VS Code Preview 匯出 PDF 防截斷排版與樣式規範
+
+當講義透過 VS Code Markdown Preview Enhanced (MPE) 搭配 Puppeteer 匯出 PDF（預設 `scale: 1.15`、邊距 `1.5cm`、內文 `16pt`、程式碼 `13pt`）時，MPE 內建主題（如 `github-light.css`、`prism_theme`）的預設樣式容易導致文字右緣切截、跨頁漏行或表格欄寬崩塌。撰寫與編輯講義時，必須同時遵循下列 **內容結構原則** 與 **CSS 覆寫規範**：
+
+### 一、長段落與程式／提示詞區塊防截斷撰寫原則
+
+1. **切分過長 Code Block（上限約 35～40 行）**：當程式範例、文件範本（如 `PRD.md`、`implementation_plan.md`）或長篇提示詞超過約 **35～40 行** 時，**禁止放入同一個超長區塊**，應依邏輯拆分為數個子區塊（例如 `範本 Part 1`、`Part 2`、`Part 3`），並於前後補充引導文字，避免瀏覽器處理多頁 `<pre>` 分頁時發生大片留白或漏行。
+2. **避免單行過長與任意手動硬換行**：在預設版面下，程式碼區塊每視覺行約僅能容納 **31～33 個全形中文字**。超過約 120～150 字的單行條列應拆成具縮排階層的子項目；但 **不可在純敘事句中間隨意插入手動 `\n` 折行**（若人工換行處略大於 33 字，PDF 會先自動折行一次、遇 `\n` 再強制換行，產生只有 2～3 字的孤立短尾行），應交由 CSS `pre-wrap` 自動折行。
+3. **高字數段落與引言框適度分段**：一般段落或 `> 💡 **老師的真心話**` 等 `blockquote` 區塊若單段超過約 **150～200 字**，應依語意轉折拆分為 **2～3 個自然段**。若於 `>` 區塊內分段，段落之間的空行 **必須保留單獨一行的** `>` 符號。
+4. **表格儲存格精簡控制**：表格儲存格內避免放置超長連續不換行字串或過長段落，使 `table-layout: auto` 能依內容分配合理欄寬。
+
+### 二、檔首 CSS 防截斷覆寫重點
+
+因 MPE 內建規則具較高選擇器權重（如 `html body pre`、`pre[class*="language-"]`、`@media print { html body pre { page-break-inside: avoid } }`），僅撰寫簡短的 `pre, code` 無法生效，必須於講義檔首 `<style>` 落實下列規則：
+
+1. **程式碼區塊與行內代碼分離覆寫**：對 `html body pre`、`html body pre[class*="language-"]`、`html body .highlight pre`、`html body pre > code`、`html body code[class*="language-"]`（並於 `@media print` 內重複宣告）設定 `white-space: pre-wrap !important`、`overflow-wrap: break-word !important`、`word-break: break-word !important`、`overflow: visible !important`，並以 `page-break-inside: auto !important; break-inside: auto !important;` 允許長程式碼自然跨頁。行內代碼 `html body code` 則獨立維持 `white-space: normal !important`，避免與 `pre` 互相干擾。
+2. **表格寬度與斷字保護**：對 `html body table` 覆寫 MPE 預設的 `overflow: auto` 與 `word-break: keep-all`，強制設定 `display: table !important; width: 100% !important; max-width: 100% !important; table-layout: auto !important; overflow: visible !important;`，並對 `table, th, td` 使用 `word-break: normal !important; overflow-wrap: break-word !important;`（ **嚴禁對表格儲存格使用** `overflow-wrap: anywhere`，以免 Chromium 將窄欄壓縮至單字元寬度而拆斷英文單字）；同時對 `tr` 加入 `page-break-inside: avoid; break-inside: avoid;`。
+3. **段落、清單與引文區塊容許跨頁與斷行**：對 `p, li, blockquote` 設定 `overflow-wrap: break-word !important; max-width: 100% !important;`，並讓 `blockquote` 設定 `overflow: visible !important; page-break-inside: auto !important; break-inside: auto !important;`。
+4. **隱藏 `h2` 換頁前的孤立分隔線**：講義已設定 `h2 { page-break-before: always; break-before: page; }`，為防止前一頁恰好寫滿時 `---` 單獨掉到新頁形成空白線頁，必須於 `@media print` 內加入 `html body hr:has(+ h2) { display: none !important; }`。
+
+### 三、講義檔首標準範本（YAML Frontmatter + `<style>`）
+
+新建或重整講義 Markdown 時，請直接於檔首套用下列標準設定（將 `headerTemplate` 的週次與單元名稱替換為當週內容）：
+
+```markdown
+---
+puppeteer:
+  displayHeaderFooter: true
+  scale: 1.15
+  headerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第 X 週：課程單元名稱</div>'
+  footerTemplate: '<div style="font-size: 11px; margin: 0 auto;">第 <span class="pageNumber"></span> 頁 / 共 <span class="totalPages"></span> 頁</div>'
+  margin:
+    top: "1.5cm"
+    bottom: "1.5cm"
+    left: "1.5cm"
+    right: "1.5cm"
+---
+
+<style>
+  /* 全域字型、字級與行距 */
+  body {
+    font-size: 16pt !important;
+    line-height: 1.7 !important;
+    font-family: "Microsoft JhengHei", "PingFang TC", "Helvetica Neue", sans-serif;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+  }
+
+  /* 階層標題微調 */
+  h1 { font-size: 30pt !important; margin-bottom: 0.5em !important; }
+  h2 { font-size: 24pt !important; page-break-before: always; break-before: page; }
+  h3 { font-size: 20pt !important; }
+  h4 { font-size: 18pt !important; }
+
+  /* 長段落、清單與引文避免溢出或跨頁截斷 */
+  html body p,
+  html body li,
+  html body blockquote {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    max-width: 100% !important;
+  }
+
+  html body blockquote {
+    overflow: visible !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    padding: 8px 15px !important;
+  }
+
+  /* 表格文字放大與排版優化（覆寫 MPE 預設 keep-all 與 overflow: auto，避免寬度溢出截斷） */
+  html body table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+    overflow: visible !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+  }
+
+  html body table,
+  html body th,
+  html body td {
+    font-size: 15pt !important;
+    line-height: 1.5 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  html body tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* 行內代碼與程式碼區塊分離設定（pre > code 置後以維持更高權重，防止 MPE 覆寫造成 PDF 截斷） */
+  html body code {
+    font-size: 13pt !important;
+    font-family: Consolas, "Courier New", monospace !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  html body pre,
+  html body pre[class*="language-"],
+  html body .highlight pre,
+  html body pre > code,
+  html body code[class*="language-"] {
+    font-size: 13pt !important;
+    font-family: Consolas, "Courier New", monospace !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  html body pre,
+  html body pre[class*="language-"],
+  html body .highlight pre {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Mermaid 流程圖節點字體放大 */
+  .mermaid text {
+    font-size: 14px !important;
+  }
+
+  @media print {
+    html body pre,
+    html body pre[class*="language-"],
+    html body .highlight pre,
+    html body pre > code,
+    html body code[class*="language-"] {
+      white-space: pre-wrap !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+      overflow: visible !important;
+      page-break-inside: auto !important;
+      break-inside: auto !important;
+    }
+
+    html body code {
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+    }
+
+    html body blockquote {
+      overflow: visible !important;
+      page-break-inside: auto !important;
+      break-inside: auto !important;
+    }
+
+    html body table {
+      display: table !important;
+      overflow: visible !important;
+      word-break: normal !important;
+    }
+
+    /* h2 已強制換頁，隱藏緊鄰 h2 前的分隔線，避免產生只有一條線的空白頁 */
+    html body hr:has(+ h2) {
+      display: none !important;
+    }
+  }
+</style>
+```
+
+---
+
 # 完成前檢查
 
 送出教材之前，請再次確認：
@@ -264,6 +445,8 @@ tags:
 - 是否維護自然敘事。
 - 是否遵循教材寫作規範。
 - 是否參考教材範例。
+- 是否已將超過 35～40 行的程式碼／範本區塊與高字數段落／`>` 引言框（約 150～200 字以上）適度切分，並確認無過長單行或不當手動換行。
+- 檔首是否已完整納入 VS Code Preview 匯出 PDF 防截斷 `<style>` 規範（含 `pre-wrap`、`page-break-inside: auto`、`table` 寬度修正與 `hr:has(+ h2)` 規則）。
 - 是否完成 Markdown 與 KaTeX 自動整理 (`clean_markdown.py`)。
 - 是否沒有聊天式語氣。
 - 是否適合作為正式教材。

@@ -61,7 +61,6 @@
     flex-direction: column;
     gap: 10px;
     position: relative;
-    transition: all 0.2s;
   }
   .card.highlight {
     background: #f0fdf4;
@@ -83,6 +82,11 @@
     border-color: #fde68a;
     box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
   }
+  .card.rose {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.10);
+  }
   .card-tag {
     font-size: 12px;
     font-weight: 700;
@@ -102,13 +106,6 @@
     color: #475569;
     line-height: 1.6;
   }
-  .card-list {
-    margin: 0;
-    padding-left: 18px;
-    font-size: 13.5px;
-    color: #475569;
-    line-height: 1.6;
-  }
   .arrow {
     display: flex;
     align-items: center;
@@ -118,6 +115,13 @@
     font-weight: bold;
     padding: 0 4px;
   }
+  code {
+    background: rgba(15, 23, 42, 0.06);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+  }
 
   .comp-grid {
     display: grid;
@@ -125,44 +129,44 @@
     gap: 16px;
   }
 </style></head><body>
-<div class="container" style="width: 1040px;">
+<div class="container" style="width: 1050px;">
   <div class="header">
     <div class="header-icon" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">📋</div>
     <div>
-      <div class="header-title">PRD (產品需求文件) 五大核心要件</div>
-      <div class="header-subtitle">指揮 AI 代理人實作的最關鍵藍圖架構</div>
+      <div class="header-title">PRD (產品需求文件) 五大核心要素與技術護欄</div>
+      <div class="header-subtitle">指揮 AI 代理人精準實作多頁式原生網站的唯一真相來源 (Single Source of Truth)</div>
     </div>
   </div>
   <div class="comp-grid">
     <div class="card">
       <div class="card-tag" style="background: #e0e7ff; color: #3730a3;">1. 網站目標 Goal</div>
       <div class="card-title">為誰解決什麼問題</div>
-      <div class="card-desc">說明官網設立目的，例如讓客人線上看菜單、了解自烘豆理念與來店路線 (CTA)。</div>
+      <div class="card-desc">說明官網設立核心目的，例如傳遞專業信賴感、展示服務項目並引導線上預約初談 (CTA)。</div>
     </div>
     <div class="card">
       <div class="card-tag" style="background: #e0e7ff; color: #3730a3;">2. 目標受眾 Audience</div>
       <div class="card-title">網站是做給誰看的</div>
-      <div class="card-desc">界定核心讀者（如：用筆電的上班族、大學生）與次要讀者（社區鄰居）。</div>
+      <div class="card-desc">界定主要受眾（如：高壓上班族、青年）與次要受眾（家長、社區居民）的瀏覽情境。</div>
     </div>
     <div class="card">
-      <div class="card-tag" style="background: #e0e7ff; color: #3730a3;">3. 視覺調性 Vibe</div>
-      <div class="card-title">Vibe Coding 的靈魂</div>
-      <div class="card-desc">日系侘寂風、黑金專業商務風、暗黑霓虹；定義色彩 HEX 代碼與字體風格。</div>
+      <div class="card-tag" style="background: #e0e7ff; color: #3730a3;">3. 視覺風格 Vibe</div>
+      <div class="card-title">色彩計畫與氛圍調性</div>
+      <div class="card-desc">拒絕模糊形容詞！明確指定至少 3 組 HEX 色票代碼（背景、主色、點綴色）與襯線/黑體搭配。</div>
     </div>
-    <div class="card">
-      <div class="card-tag" style="background: #e0e7ff; color: #3730a3;">4. 功能區塊 Features</div>
-      <div class="card-title">單頁式由上至下佈局</div>
-      <div class="card-desc">Navbar 導覽列 ➔ Hero 主視覺 ➔ About Us ➔ Menu 菜單 ➔ Contact & Map ➔ Footer。</div>
+    <div class="card primary">
+      <div class="card-tag" style="background: #dbeafe; color: #1e40af;">4. 網站地圖 Site Map</div>
+      <div class="card-title">4 頁獨立架構與導航</div>
+      <div class="card-desc">明確定義 <code>index.html</code> 等 4 個分頁檔名、各頁區塊階層，以及全站共用導覽列 <code>active</code> 規範。</div>
     </div>
-    <div class="card">
-      <div class="card-tag" style="background: #e0e7ff; color: #3730a3;">5. 技術要求 Tech Specs</div>
-      <div class="card-title">前端工程規範</div>
-      <div class="card-desc">單頁式 (SPA)、Tailwind CSS CDN、Mobile-First 響應式 (RWD)、HTML5 語意標籤。</div>
+    <div class="card rose">
+      <div class="card-tag" style="background: #ffe4e6; color: #be123c;">5. 技術護欄 Tech Guardrails</div>
+      <div class="card-title">限定原生三劍客・禁框架</div>
+      <div class="card-desc">限定 HTML5 語意標籤 ＋ 外部 <code>style.css</code> ＋ 原生 <code>script.js</code>；<strong>嚴禁 Vue / React 等需編譯框架</strong>。</div>
     </div>
     <div class="card highlight">
-      <div class="card-tag" style="background: #dcfce7; color: #15803d;">同儕互評審查</div>
-      <div class="card-title">消除模糊盲點</div>
-      <div class="card-desc">經同桌同學挑出 3 個抽象形容詞並修訂後，才算真正合格的 AI 提示藍圖！</div>
+      <div class="card-tag" style="background: #dcfce7; color: #15803d;">同儕審查 &amp; Planning</div>
+      <div class="card-title">消除盲點再動工</div>
+      <div class="card-desc">經同儕排雷並啟動 Planning Mode 檢視檔案樹後，才算真正合格的 AI 施工藍圖！</div>
     </div>
   </div>
 </div>

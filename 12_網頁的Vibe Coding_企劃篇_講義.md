@@ -17,26 +17,129 @@ puppeteer:
     font-size: 16pt !important;
     line-height: 1.7 !important;
     font-family: "Microsoft JhengHei", "PingFang TC", "Helvetica Neue", sans-serif;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
   }
 
   /* 階層標題微調 */
   h1 { font-size: 30pt !important; margin-bottom: 0.5em !important; }
-  h2 { font-size: 24pt !important; page-break-before: always; }
+  h2 { font-size: 24pt !important; page-break-before: always; break-before: page; }
   h3 { font-size: 20pt !important; }
   h4 { font-size: 18pt !important; }
 
-  /* 表格文字放大與排版優化 */
-  table, th, td {
-    font-size: 15pt !important;
-    line-height: 1.5 !important;
+  /* 長段落、清單與引文避免溢出或跨頁截斷 */
+  html body p,
+  html body li,
+  html body blockquote {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    max-width: 100% !important;
   }
 
-  /* 程式碼區塊 (自動換行防止 PDF 截斷) */
-  pre, code {
+  html body blockquote {
+    overflow: visible !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    padding: 8px 15px !important;
+  }
+
+  /* 表格文字放大與排版優化（覆寫 MPE 預設 keep-all 與 overflow: auto，避免寬度溢出截斷） */
+  html body table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+    overflow: visible !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+  }
+
+  html body table,
+  html body th,
+  html body td {
+    font-size: 15pt !important;
+    line-height: 1.5 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  html body tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* 程式碼區塊與行內代碼（覆寫 MPE 預設 pre 不跨頁與 overflow: auto，防止 PDF 截斷） */
+  html body code {
+    font-size: 13pt !important;
+    font-family: Consolas, "Courier New", monospace !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  html body pre,
+  html body pre[class*="language-"],
+  html body .highlight pre,
+  html body pre > code,
+  html body code[class*="language-"] {
     font-size: 13pt !important;
     font-family: Consolas, "Courier New", monospace !important;
     white-space: pre-wrap !important;
-    word-break: break-all !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  html body pre,
+  html body pre[class*="language-"],
+  html body .highlight pre {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  @media print {
+    html body pre,
+    html body pre[class*="language-"],
+    html body .highlight pre,
+    html body pre > code,
+    html body code[class*="language-"] {
+      white-space: pre-wrap !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+      overflow: visible !important;
+      page-break-inside: auto !important;
+      break-inside: auto !important;
+    }
+
+    html body code {
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+    }
+
+    html body blockquote {
+      overflow: visible !important;
+      page-break-inside: auto !important;
+      break-inside: auto !important;
+    }
+
+    html body table {
+      display: table !important;
+      overflow: visible !important;
+      word-break: normal !important;
+    }
+
+    /* h2 已強制換頁，隱藏緊鄰 h2 前的分隔線，避免產生只有一條線的空白頁 */
+    html body hr:has(+ h2) {
+      display: none !important;
+    }
   }
 </style>
 
@@ -54,15 +157,15 @@ puppeteer:
 
 ## 本週學習目標 (Weekly Mission)
 
-歡迎進入 Vibe Coding 的核心首部曲 —— **Phase 1：企劃 (Planning)**！
+歡迎進入 Vibe Coding 的核心首部曲 —— **Phase 1：企劃 (Planning) **！
 
-上週我們已經用 GitHub Desktop 建立了專案資料夾，並在 Antigravity 2.0 Desktop 中掛載成功。這週你的核心任務只有一個：**為你的多頁式網站打造一份清晰、嚴密、AI 看得懂的施工藍圖（PRD.md），並指揮 AI 生成架構規劃工件！**
+上週我們已經學會用 GitHub Desktop 建立專案資料夾，並在 Antigravity 2.0 Desktop 中掛載與推送上線。這週你的核心任務只有一個： **為你的多頁式網站打造一份清晰、嚴密、AI 看得懂的施工藍圖（PRD.md），並指揮 AI 生成架構規劃工件！**
 
 完成本週學習後，你將能夠：
-1. **掌握 PRD 的五大核心要素**：以專業產品經理視角，定義多頁網站的目標、受眾、氛圍調性、分頁架構與技術規範。
-2. **靈活運用 `/grill-me` 深入訪談**：讓 Antigravity 2.0 扮演嚴格的顧問，透過一問一答挖掘網站細節盲點。
+1. **掌握 PRD 的五大核心要素與技術護欄**：以專業產品經理視角，定義多頁網站的目標、受眾、氛圍調性、分頁架構，並劃定「僅限原生 HTML / CSS / JavaScript、禁用前端框架」的技術紅線。
+2. **靈活運用 `/grill-me` 深入訪談**：讓 Antigravity 2.0 扮演嚴格的顧問，透過一問一答挖掘網站細節盲點與原生微互動巧思。
 3. **整合多模態草圖輸入**：手繪多頁 Wireframe 草圖拍照拖入對話框，讓 AI 快速解析佈局。
-4. **啟動 Planning Mode**：引導 AI 產出 `implementation_plan.md` 工件，精確拆解 4 個 HTML 分頁、共用導覽列與圖片資產清單。
+4. **啟動 Planning Mode**：引導 AI 產出 `implementation_plan.md` 工件，精確拆解 4 個 HTML 分頁、外部共用 `style.css` 與 `script.js` 架構及圖片資產清單。
 5. **在 GitHub Desktop 進行里程碑提交**：落實「企劃先行」的版本控管習慣。
 
 ---
@@ -84,13 +187,15 @@ puppeteer:
 
 ### 2. 多頁式網站的核心架構標準（4 個核心頁面）
 在本次實作專案中，我們要求規劃一個完整的 **4 頁式網站**（以「牧心心理治療所」為例）：
-1. **首頁 (`index.html`)**：品牌門面！全寬溫暖主視覺 (Hero Banner)、核心理念與使命、精選服務/專業特色摘要、引導訪客展開諮商的行動按鈕 (Call to Action)。
-2. **專業團隊 (`team.html`)**：品牌靈魂！主持心理師理念、團隊心理師資歷專長卡片、諮商倫理與隱私保護承諾。
-3. **服務項目 (`services.html`)**：核心內容！分類諮商卡片（成人個別諮商、伴侶諮商、青少年情緒探索）、諮商流程與費用說明、常見問題 (FAQ)。
-4. **聯絡方式 (`contact.html`)**：轉換最後一步！治療所交通指引、嵌入式 Google 互動地圖、線上初談預約表單、緊急危機求助專線說明。
+1. **首頁 (`index.html`) **：品牌門面！全寬溫暖主視覺 (Hero Banner)、核心理念與使命、精選服務/專業特色摘要、引導訪客展開諮商的行動按鈕 (Call to Action)。
+2. **專業團隊 (`team.html`) **：品牌靈魂！主持心理師理念、團隊心理師資歷專長卡片、諮商倫理與隱私保護承諾。
+3. **服務項目 (`services.html`) **：核心內容！分類諮商卡片（成人個別諮商、伴侶諮商、青少年情緒探索）、諮商流程與費用說明、常見問題 (FAQ)。
+4. **聯絡方式 (`contact.html`) **：轉換最後一步！治療所交通指引、嵌入式 Google 互動地圖、線上初談預約表單、緊急危機求助專線說明。
 
 > 💡 **老師的真心話**  
-> 很多同學一開始會覺得「為什麼不直接叫 AI 寫代碼就好，還要花時間寫 PRD？」請記住：AI 就像一個剛進公司的初階實習生，能力很強但沒有常識。如果你不給他一份清清楚楚的 PRD 當作「唯一真相來源 (Single Source of Truth)」，他就會在首頁用溫暖綠、團隊頁用科技風、服務頁胡亂捏造。企劃做得越嚴謹，後面的開發就越輕鬆！
+> 很多同學一開始會覺得「為什麼不直接叫 AI 寫代碼就好，還要花時間寫 PRD？」請記住：AI 就像一個剛進公司的初階實習生，能力很強但沒有常識。
+>
+> 如果你不給他一份清清楚楚的 PRD 當作「唯一真相來源 (Single Source of Truth)」，他就會在首頁用溫暖綠、團隊頁用科技風、服務頁胡亂捏造。企劃做得越嚴謹，後面的開發就越輕鬆！
 
 ---
 
@@ -106,47 +211,60 @@ puppeteer:
 | **2. 目標受眾 (Audience)** | 網站做給誰看？使用情境是什麼？ | 主要受眾為面對職場壓力、人際困擾或情緒低潮的成年上班族與青年；次要受眾為尋求伴侶協談、親職教養與青少年情緒支持的家庭成員。 |
 | **3. 視覺風格 (Vibe & Style)** | 色彩計畫 (HEX 代碼)、字體設定、情緒氛圍關鍵字。 | 溫暖療癒風 (Calm & Healing)。柔和米杏白背景 (`#FAF8F5`)、沈穩鼠尾草綠主色 (`#2D5A4C`)、溫潤暖陶土橘點綴色 (`#D4A373`)；標題思源宋體、內文思源黑體。 |
 | **4. 網站地圖 (Site Map)** | 明確列出 4 個分頁的檔名、區塊分工與跨頁導航規範。 | `index.html` (首頁/理念與服務摘要)、`team.html` (專業心理師群專長卡片)、`services.html` (三大諮商項目與費用FAQ)、`contact.html` (交通地圖與初談預約表單)。 |
-| **5. 技術規格 (Tech Spec)** | 框架、語意化標籤、CSS 架構與響應式要求。 | 採用 Tailwind CSS CDN + 外部 `mystyles.css`；全站共用頂部 `<nav>` 與底端 `<footer>`；手機優先 (Mobile-First RWD)；跨頁 active 狀態高亮。 |
+| **5. 技術規格與護欄 (Tech Spec & Guardrails)** | 語意標籤、外部 CSS/JS 架構、RWD 要求，以及 **禁用前端框架的負向約束**。 | 採用 HTML5 語意標籤 ＋ 外部共用 `style.css`（`:root` 色票變數、Flexbox/Grid RWD）＋ 外部共用 `script.js`（原生 DOM 微互動）； **嚴禁引入 Vue、React、Vite 等前端框架**。 |
+### 關鍵企劃心法：設定「技術紅線 (Negative Constraints)」與「微互動需求」
+
+在撰寫第 5 項「技術規格」時，除了告訴 AI「要做什麼」，專業產品總監更懂得明確寫下 **Negative Constraints（負向約束／技術紅線）** —— 清楚規定 AI **「絕對不准用什麼」**：
+* **為什麼必須明文禁止 Vue / React 等前端框架？**  
+  當你在企劃中提到「分類篩選」、「手風琴展開」或「預約表單」時，若未加限制，AI 很容易自動引入 React、Vue 或 Vite 等進階框架，產出需要 Node.js 編譯的 `.jsx` / `.vue` 檔案與數萬個 `node_modules` 套件檔。這不僅會讓電腦教室環境跑不動、打開網頁變全白，更會讓你無法運用前半學期學過的知識進行審查。
+* **回歸第 3～5 週課堂所學的黃金架構**：  
+  在 PRD 中限定使用 **「4 個獨立 `.html` ＋ 單一外部共用 `style.css` ＋ 單一外部共用 `script.js`」**，不僅能完美兌現我們第 4 週學過的「結構與視覺分離（改一個 CSS 變數，全站 4 頁同步換色）」，也能將漢堡選單、FAQ 摺疊或分類篩選等微互動集中寫在幾十行乾淨的原生 JavaScript 中，讓你對每一行代碼都擁有 100% 的掌控力！
 
 > 💡 **老師的真心話**  
-> 在 PRD 的五大要素中，同學最常在「視覺風格」偷懶，寫下「簡約大方」、「很溫暖」這種空泛的形容詞。請務必直接給出明確的 HEX 色票（例如代表沉靜專業的鼠尾草綠 `#2D5A4C` 或米杏白 `#FAF8F5`）與具體的字體名稱（例如 `Noto Serif TC`）。你給的規格越具體，AI 產出的網站就越接近你心目中的質感！
+> 在 PRD 的五大要素中，同學最常犯兩個錯誤：第一是在「視覺風格」偷懶，只寫「簡約大方」、「很溫暖」，卻沒給出明確的 HEX 色票（如鼠尾草綠 `#2D5A4C`、米杏白 `#FAF8F5`）與字體名稱（如 `Noto Serif TC`）。
+>
+> 第二則是在「技術規格」忘記寫下「禁止使用 Vue / React 框架」，結果後面生成出一堆看不懂的檔案！你給的規格邊界越具體，AI 產出的網站就越乾淨、越接近你心目中的理想質感！
 
 ---
 
 ## 企劃開工前哨站：專案工作區與會話情境決策 (Pre-flight Setup)
 
 在我們召喚 Antigravity 進行 `/grill-me` 深度訪談前，請同學先停下腳步確認你的工作環境。  
-很多同學常問：「**老師，我到底要開新專案 (方案 A) ，還是用上週的資料夾 (方案 B) ？可以直接接著上週的對話繼續聊 (方案 C) 嗎？**」
+很多同學常問：「**老師，我這週要開一個全新的專案與新對話嗎？還是可以直接沿用上週的專案資料夾與對話繼續聊就好？**」
 
 在這裡，老師要以非常堅決但充滿叮嚀的語氣直接告訴大家：  
-**請你務必視自己的實際狀況，在「方案 A」與「方案 B」中二選一；絕對、千萬不要以「方案 C」進行！**
+**請所有同學一律「建立全新專案、新儲存庫與新對話」重新開局；絕對、千萬不要偷懶沿用上週的專案與舊對話！**
 
-### 你的唯一兩條正確路徑：方案 A 或 方案 B
+### 唯一正確做法：為正式多頁主題建立新專案、新儲存庫與新對話
 
-1. **方案 A（最推薦：為正式多頁主題開闢新專案與新儲存庫）**
-   * **誰該選方案 A**：如果你第 11 週建立的資料夾只是隨手命名的測試專案（例如叫 `my-vibe-project`、`test-demo`），而今天你已經決定好了正式的多頁主題（例如要認真做「牧心心理治療所 `muxin-clinic`」或「吉他社官網 `guitar-club`」）。
-   * **具體步驟**：
-     1. 打開 **GitHub Desktop**，建立一個以正式主題命名的全新公開倉庫（例如 `muxin-clinic`），並點擊 **Publish repository**（確認不勾選 Keep this code private）。
-     2. 開啟 **Antigravity 2.0 Desktop**，點擊 **Create Project** 掛載這個全新的專案資料夾。
-   * **為什麼要這樣做**：倉庫名稱未來就是你的線上專屬網址（`https://帳號.github.io/muxin-clinic/`），新資料夾乾淨純粹，完全不會被上週的破冰檔案 `hello.html` 混淆。
-
-2. **方案 B（沿用既有專案資料夾，但務必「開啟新會話」）**
-   * **誰該選方案 B**：如果你上週建立的倉庫名稱本來就已經是你的正式主題（例如你上週就已經命名為 `portfolio-2026` 或 `muxin-clinic`），這週打算直接在這個資料夾裡打造多頁網站。
-   * **具體步驟**：
-     * 保持目前的專案資料夾不變，但在輸入 `/grill-me` 之前，**請務必點擊 Antigravity 聊天視窗左上角的「＋ New Conversation（開啟新會話）」按鈕**！
-   * **為什麼要這樣做**：沿用了既有的 Git 倉庫綁定，同時把對話視窗徹底洗淨，讓 AI 重新進入專注狀態。
+* **適用對象**：**所有準備展開本週正式多頁網站企劃的同學**。第 11 週的倉庫是用來練習工具與破冰測試的「草稿本」，從本週開始，我們要正式打造自己的多頁形象官網（例如「牧心心理治療所 `muhsin-clinic`」或「吉他社官網 `guitar-club`」），必須有一個乾乾淨淨的新家。
+* **具體步驟**：
+  1. 打開 **GitHub Desktop**，建立一個以正式主題英文名稱命名的**全新公開倉庫**（例如 `muhsin-clinic`），並點擊 **Publish repository**（務必確認**不勾選** `Keep this code private`）。
+  2. 開啟 **Antigravity 2.0 Desktop**，點擊 **Create Project** 掛載這個全新的專案資料夾。
+  3. 確認開啟一個**全新的對話視窗（＋ New Conversation）**，在乾淨無雜訊的畫布中準備輸入 `/grill-me`。
+* **為什麼必須這樣做**：
+  * **擁有專業的專屬網址**：新倉庫名稱就是未來作品集的正式線上網址（`https://帳號.github.io/muhsin-clinic/`）。
+  * **資料夾純淨無干擾**：沒有上週的測試檔 `hello.html` 與練習代碼，Git 版本紀錄從零開始，架構一目了然。
+  * **對話畫布純白專注**：全新的工作區搭配全新的會話，讓 AI 從第一句話就 100% 聚焦在你的多頁網站需求。
 
 ---
 
-### 絕對禁止：方案 C（在同一條舊對話中繼續聊下去）
+### 絕對禁止的錯誤做法：直接沿用上週專案資料夾與舊對話繼續聊下去
 
-* **什麼是方案 C**：直接打開上週做完 `hello.html` 的同一個聊天視窗，接著在底下輸入 `/grill-me` 展開企劃。
-* **為什麼老師絕對禁止方案 C**：
-  請聽老師一聲勸告：上週的舊對話裡堆滿了幾百行關於 `hello.html`、夜間模式按鈕、以及初次 Git push 排除錯誤的雜亂過程。AI 的上下文記憶（Context Window）是非常寶貴的運算資源，如果塞滿了這些破冰雜訊，AI 就會產生「注意力渙散 (Attention Dilution)」。它在幫你企劃多頁藍圖時，會不由自主地被上週的單頁程式碼牽著鼻子走，甚至把舊代碼莫名混入新的規格書中！
-* **記住這條鐵律**：無論你選方案 A 還是方案 B，**展開全新企劃時，AI 的對話視窗必須是一張乾淨無瑕的白紙**！
+* **常見錯誤情境**：不另外建立新倉庫，直接打開第 11 週做過 `hello.html` 的舊專案資料夾，並在當時同一個聊天視窗底下接著輸入 `/grill-me` 展開企劃。
+* **為什麼老師絕對禁止這種做法（兩大致命傷）**：
+  1. **沿用「上週專案工作區」的問題 — 測試殘留、網址不專業、架構混雜**：
+     * **舊檔 `hello.html` 干擾 AI 判斷**：上週資料夾裡已經存在單頁式破冰檔案 `hello.html`（包含發光按鈕與深色切換測試碼），AI 讀取整個目錄時，容易誤把這個練習檔當成既有網站骨架，甚至在後續開發時與新的 `index.html` 混淆、混入舊版樣式。
+     * **倉庫名稱與 Git 紀錄混亂**：上週隨手取名的練習倉庫（如 `test-demo`、`my-vibe-project`）會直接變成未來不專業的線上網址；大量破冰練習的 Commit 紀錄與可能已開啟的 GitHub Pages 設定，也會讓正式專案的版本管理變得一團亂。
+  2. **沿用「上週舊對話」的問題 — 雜訊汙染、注意力渙散**：
+     * **上下文記憶過載 (Attention Dilution)**：上週的舊對話裡塞滿了幾百行關於 `hello.html`、粉紫按鈕特效以及初次 `git push` 排錯的過程。AI 的上下文記憶（Context Window）非常寶貴，被這些破冰雜訊塞滿後，理解與規劃能力會大幅下降。
+     * **被單頁測試慣性牽著鼻子走**：AI 會順著同一條對話的前文脈絡思考，導致它在幫你企劃 4 頁網站藍圖時，不由自主地帶入上週的單頁寫法、配色或舊程式碼片段，把新規格書寫得四不像！
+* **記住這條鐵律**：展開正式多頁網站企劃時，**「全新專案資料夾 ＋ 全新 AI 對話視窗」兩者缺一不可，必須是一張乾淨無瑕的白紙**！
 
 > 💡 **老師的真心話**  
-> 「工欲善其事，必先利其器。」在 AI 時代，頂尖開發者與新手的差距，往往不在於誰背得起更多語法，而在於誰懂得給 AI 最精準、乾淨的上下文環境。請答應老師：今天務必果斷在方案 A 或方案 B 之間做選擇，絕對不要偷懶採用方案 C。給 AI 一張乾淨的畫布，它才能心無旁騖地為你產出最高品質的 PRD 規格書！
+> 「工欲善其事，必先利其器。」在 AI 時代，頂尖開發者與新手的差距，往往不在於誰背得起更多語法，而在於誰懂得給 AI 最精準、乾淨的工作環境與上下文脈絡。
+>
+> 上週的專案與對話只是我們熱身用的「練習本」，今天請務必果斷另起爐灶、建立全新的專案與會話，千萬不要為了省兩分鐘而直接沿用上週的舊專案與舊對話。給 AI 一個純淨的資料夾與空白畫布，它才能心無旁騖地為你產出最高品質的 `PRD.md` 規格書！
 
 ---
 
@@ -174,7 +292,9 @@ puppeteer:
 2. 目標受眾 (Target Audience)
 3. 視覺風格與色彩調性 (Vibe & Style，請建議 3 個核心 HEX 色票)
 4. 網站地圖與各頁核心區塊 (Site Map & Sections)
-5. 技術規格與素材需求 (Technical Requirements & Assets)
+5. 技術規格、原生微互動與架構護欄 (Technical Requirements & Guardrails)：
+   - 本專案嚴格限定僅使用標準 HTML5、外部共用 style.css 與原生 JavaScript，禁止使用 Vue、React、Vite 等任何前端框架。
+   - 請詢問我希望在網站中加入哪 1~2 項原生 JS 微互動（如 FAQ 摺疊、分類篩選或表單驗證回饋）。
 
 請一次提問 2~3 個問題，等我回答後再繼續深入，直到我們把細節釐清完畢，最後整理成一份標準的 PRD.md！
 ```
@@ -189,19 +309,27 @@ puppeteer:
 
 ```text
 太棒了！請依據我們剛才所有確認的細節，整理成一份標準的多頁網站 PRD 規格書，並直接在專案根目錄建立 PRD.md 檔案。
+
 請務必嚴格包含以下五大核心章節：
 1. 專案目標 (Project Goal)
 2. 目標受眾 (Target Audience)
-3. 視覺風格與調性 (Vibe & Style：包含色彩計畫 HEX 代碼、字體搭配與氛圍關鍵字)
-4. 網站地圖與多頁規格 (Site Map & Pages：清楚定義 index.html, team.html, services.html, contact.html 四個分頁的區塊階層與跨頁導航 active 規範)
-5. 技術規格 (Technical Requirements：多頁相對路徑、Tailwind CSS CDN、HTML5 語意標籤與 Mobile-First RWD)
+3. 視覺風格與調性 (Vibe & Style)：包含色彩計畫 HEX 代碼、字體搭配與氛圍關鍵字
+4. 網站地圖與多頁規格 (Site Map & Pages)：清楚定義 index.html, team.html, services.html, contact.html 四個分頁的區塊階層與跨頁導航 active 規範
+5. 技術規格與架構護欄 (Technical Requirements & Guardrails)：
+   - 多頁相對路徑、HTML5 語意標籤
+   - 外部共用 style.css（:root 色票變數與 Flexbox/Grid RWD）
+   - 外部共用 script.js（原生 DOM 微互動）
+   - 明文寫入「嚴禁使用 Vue、React、Next.js、Vite、Tailwind 或任何需 npm 編譯的前端框架」之負向約束
 ```
 觀察 Antigravity 的動作 —— 它會自動使用檔案工具，在你的本地專案目錄建立 `PRD.md`。完全不用你手動複製貼上！
 
 > 💡 **老師的真心話**  
 > 很多同學會問：「老師，如果我只在 Prompt 寫『依照五大要素』，AI 會自動知道是哪五大要素嗎？」  
-> **答案是：AI 絕對不會通靈！**  
-> 「PRD 五大要素」是我們這門課定義的教學標準。AI 在受訓時看過全世界成千上萬種軟體業的 PRD 模板，有的包含 KPI 指標、有的包含商業畫布或時程表。如果你沒在 Prompt 裡清清楚楚把這五個章節名稱（目標、受眾、風格、網站地圖、技術規格）列給它，AI 就會自己「自由發揮」，產出類似但完全不同的章節，甚至漏掉最重要的「4 頁網站地圖」！請記住 Prompt Engineering 的黃金鐵律：**想要什麼精確結構，就在指令中明確指名章節標題！**
+> **答案是：AI 絕對不會通靈！**
+>
+> 「PRD 五大要素」是我們這門課定義的教學標準。AI 在受訓時看過全世界成千上萬種軟體業的 PRD 模板，有的包含 KPI 指標、有的包含商業畫布或時程表。
+>
+> 如果你沒在 Prompt 裡清清楚楚把這五個章節名稱（目標、受眾、風格、網站地圖、技術規格）列給它，AI 就會自己「自由發揮」，產出類似但完全不同的章節，甚至漏掉最重要的「4 頁網站地圖」！請記住 Prompt Engineering 的黃金鐵律： **想要什麼精確結構，就在指令中明確指名章節標題！**
 
 ---
 
@@ -232,10 +360,12 @@ puppeteer:
 
 ## Ⅴ. 牧心心理治療所多頁網站標準 PRD 完整範本 (`PRD.md`)
 
-這是一份達到 95 分標準的多頁網站 PRD。請打開專案中的 `PRD.md`，對照你的內容是否同樣具體詳盡：
+這是一份達到 95 分標準的多頁網站 PRD。為方便對照檢查與閱讀，以下依五大章節拆分為三個部分呈現；請打開專案中的 `PRD.md`，逐節核對你的內容是否同樣具體詳盡：
+
+### 範本 Part 1：專案目標、目標受眾與視覺風格（第 1～3 節）
 
 ```markdown
-# 專案需求文件 (PRD)：牧心心理治療所 (Mu-Xin Psychotherapy Clinic) 多頁形象官網
+# 專案需求文件 (PRD)：牧心心理治療所 (Mu-Hsin Psychotherapy Clinic) 多頁形象官網
 
 ## 1. 專案目標 (Project Goal)
 為座落在都會文教區的「牧心心理治療所」建立一個兼具專業信賴感與溫暖療癒美感的多頁形象官網。傳遞「在安全接納的空間裡，陪你梳理心靈、重新找回生活力量」的核心理念，提供透明完整的心理師團隊資歷、專長與諮商服務項目，引導有需求的訪客安心跨出第一步，線上預約初談評估。
@@ -253,7 +383,11 @@ puppeteer:
   - 內文主要文字 (Text)：柔和深炭灰 `#2D312E`（避免純黑帶來的冰冷生硬感）
   - 卡片與區塊底色 (Card BG)：純白 `#FFFFFF` 搭配極細暖灰邊框 `#EAE6DF`
 - 字體搭配：標題使用優雅溫潤襯線體 (Noto Serif TC)，內文使用清晰好讀無襯線體 (Noto Sans TC)。
+```
 
+### 範本 Part 2：網站地圖與多頁規格（第 4 節）
+
+```markdown
 ## 4. 網站地圖與多頁規格 (Site Map & Page Architecture)
 全站共用規範：
 - 統一頂部導覽列：包含品牌 Logo 與 4 個頁面的相對連結（首頁、專業團隊、服務項目、聯絡方式），當前頁面頁籤必須具備 active 高亮效果（下底線或品牌綠強調色）。
@@ -263,13 +397,13 @@ puppeteer:
 1. 首頁 (index.html)
    - 主視覺 Banner (Hero)：全寬柔和自然採光的諮商室氛圍照，置中標語「在紛擾的世界裡，給心靈一個安歇的角落」，附帶「探索專業團隊」與「預約初談」引導按鈕 (CTA)。
    - 品牌核心理念 (Core Values)：3 欄特點卡片（嚴格保密承諾、國家高考合格心理師、客製化深度同理）。
-   - 精選服務推薦 (Featured Services)：展示 3 大核心諮商項目（成人個別諮商、伴侶溝通協談、青少年情緒探索）精華卡片，附帶連結引導前往 services.html。
+   - 精選服務推薦 (Featured Services)：展示 3 大核心諮商項目精華卡片（成人個別諮商、伴侶溝通協談、青少年情緒探索），附帶連結前往 services.html。
    - 預約流程快速指引 (How It Works)：4 步驟圖解流程（線上填表 ➔ 專人電話初談評估 ➔ 媒合合適心理師 ➔ 實體諮商開展）。
 
 2. 專業團隊 (team.html)
    - 頂部副 Banner：主持心理師與團隊溫馨專業合照，副標題「國家高考合格心理師，以同理與專業陪伴你」。
    - 主持心理師專欄 (Director Spotlight)：所長個人深度介紹，包含個人肖像、心理所碩士與醫學中心資歷、專長領域與諮商哲學理念。
-   - 諮商心理師群卡片 (Therapists Grid)：網格展示每位心理師卡片，包含清晰肖像照片、姓名、執業證號、專長標籤（如：情緒創傷、感情議題、職場人際、正念減壓）與預約按鈕。
+   - 諮商心理師群卡片 (Therapists Grid)：網格展示每位心理師卡片，包含清晰肖像照片、姓名、執業證號、專長標籤（情緒創傷、感情議題、職場人際、正念減壓）與預約按鈕。
    - 專業倫理與隱私承諾 (Ethical Standards)：強調恪守心理師法與諮商倫理規範，落實最高規格的個人隱私保護。
 
 3. 服務項目 (services.html)
@@ -286,16 +420,26 @@ puppeteer:
    - 互動地圖 (Google Map)：嵌入世新大學周邊文教商圈的 Google 地圖 iframe。
    - 初談線上預約表單 (Appointment Form)：姓名、聯絡電話、Email、方便接聽電話時段、諮商需求類別下拉選單、主要困擾簡述（選填）、隱私條款同意勾選框與送出按鈕。
    - 緊急危機求助聲明 (Crisis Notice)：醒目提示「若您當前處於急性危機或強烈自我傷害意念，請立即撥打 110 或 1925 尋求即時緊急援助」。
+```
 
-## 5. 技術規格 (Technical Requirements)
-- 多頁式架構 (Multi-Page Website)，頁面間透過相對路徑連結（如 href="team.html", href="services.html"）。
-- 採用語意化 HTML5 標籤 (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`)。
-- 引入 Tailwind CSS CDN 進行響應式排版，並搭配專案內 `mystyles.css` 補足自定義字型與微調樣式。
-- 全站響應式設計 (Mobile-First RWD)，手機端（<768px）導覽列提供折疊選單，卡片自動轉為單欄顯示。
+### 範本 Part 3：技術規格與架構護欄（第 5 節）
+
+```markdown
+## 5. 技術規格與架構護欄 (Technical Requirements & Guardrails)
+- 多頁式純靜態架構 (Multi-Page Website)：共 4 個獨立 HTML 檔案，頁面間一律透過乾淨相對路徑連結（如 href="team.html", href="services.html"，禁止開頭加上斜線 /）。
+- 語意化結構：全面採用 HTML5 語意標籤（`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`），杜絕濫用無意義的 `<div>`。
+- 外部共用樣式表 (`style.css`)：落實結構與視覺分離，於 `:root` 集中定義全站 HEX 色彩變數與 Google Fonts (`Noto Serif TC`, `Noto Sans TC`)；使用 Flexbox、CSS Grid 與 `@media (max-width: 768px)` 實作響應式排版 (RWD)，手機端卡片自動轉為單欄。
+- 外部共用互動腳本 (`script.js`)：使用原生 JavaScript (Vanilla JS DOM API) 實作三項輕量微互動：
+  1. 手機版（<768px）頂部導覽列漢堡選單按鈕開合切換。
+  2. `services.html` 常見問題 (FAQ) 點擊標題展開／收合手風琴效果。
+  3. `contact.html` 初談預約表單必填欄位檢查與送出後溫馨確認提示。
+- 🚫 技術紅線（Negative Constraints）：嚴格禁止引入 Vue、React、Next.js、Angular、Vite、Tailwind CSS 或任何前端框架，亦禁止產生 `package.json` 或需要 Node.js / `npm` 編譯打包之工具鏈，確保全站可於標準瀏覽器與 GitHub Pages 直接運行。
 ```
 
 > 💡 **老師的真心話**  
-> 請把這份「牧心心理治療所」範本當作你的標竿。檢查一下你自己的 `PRD.md`，是否清楚規範了 4 個分頁的檔名（`index.html`, `team.html`, `services.html`, `contact.html`）與頁籤 active 狀態？如果發現有漏掉的區塊，隨時可以叫 Antigravity 幫你補上，把藍圖打磨到 90 分再動工！
+> 請把這份「牧心心理治療所」範本當作你的標竿。檢查一下你自己的 `PRD.md`，除了清楚規範 4 個分頁的檔名與頁籤 active 狀態外， **第 5 節是否也明確寫下了「外部 `style.css` + 原生 `script.js`」以及「嚴禁 Vue / React 前端框架」的技術紅線？**
+>
+> 如果發現有漏掉的區塊或護欄，隨時叫 Antigravity 幫你補上，把藍圖打磨到 95 分再動工！
 
 ---
 
@@ -316,9 +460,9 @@ PRD 完成後，先不要急著動工！我們需要透過同儕互評與 AI 規
 請詳細研讀 @PRD.md。
 現在請進入 Planning Mode（規劃模式），嚴格禁止直接動工建立 HTML 代碼！
 請為我規劃一份專業的 implementation_plan.md 工件，包含：
-1. 專案多頁檔案目錄結構樹（包含 index.html, team.html, services.html, contact.html, mystyles.css, img/）
-2. 全站色彩計畫與 Tailwind class 配置對照表
-3. 4 個分頁的組件拆解（各頁的 section 階層）與跨頁導航 (Navbar) 連結架構
+1. 專案多頁檔案目錄結構樹：僅限 index.html, team.html, services.html, contact.html, style.css, script.js, img/（確認絕無 package.json 或任何前端框架檔案）
+2. 全站色彩計畫與 style.css 的 :root CSS 變數及 RWD 媒體查詢斷點規劃
+3. 4 個分頁的區塊拆解（各頁 section 階層）、跨頁導航 (Navbar) 連結架構，以及 script.js 預計實作的原生 DOM 微互動清單
 4. 網站所需生成的專屬圖片素材清單（包含每張圖的檔名、畫面描述、長寬比）
 5. 若有任何規格未定義清楚的細節，請在計畫書中列出提問！
 ```
@@ -356,7 +500,8 @@ PRD 完成後，先不要急著動工！我們需要透過同儕互評與 AI 規
 * [ ] 我的專案根目錄下已存在完整的 `PRD.md` 檔案，且非空白內容。
 * [ ] PRD 中明確定義了 **4 個分頁**（`index.html`、`team.html`、`services.html`、`contact.html`）的各自職責與內容。
 * [ ] PRD 中記錄了至少 3 組具體的色彩 HEX 色票代碼，而非模糊的形容詞。
-* [ ] 我已在 Antigravity 中啟動 Planning Mode，並在右側 Artifacts 窗格看到了 `implementation_plan.md` 工件。
+* [ ] PRD 第 5 節已明確寫入 **「僅限標準 HTML5 + 外部 `style.css` + 原生 `script.js`，嚴禁使用 Vue / React 等前端框架」** 之技術護欄，並規劃了 1～2 項原生 JS 微互動。
+* [ ] 我已在 Antigravity 中啟動 Planning Mode，並在右側 Artifacts 窗格看到了乾淨無框架的 `implementation_plan.md` 工件。
 * [ ] 我已在 GitHub Desktop 完成本週的 Commit，Changes 清單已清空。
 
 > 💡 **老師的真心話**  
@@ -372,8 +517,11 @@ PRD 完成後，先不要急著動工！我們需要透過同儕互評與 AI 規
   👉 **解答**：請確認你是否在 Antigravity 中正確掛載專案資料夾（Create Project），而不是只開了單一檔案。只要掛載的是根目錄，AI 就能自由讀寫本地檔案。
 * **Q3：AI 在 Planning Mode 一直想要偷跑動手寫 HTML 怎麼辦？**  
   👉 **解答**：在提示詞開頭嚴正強調：「現在是規劃階段，請停留在 Planning 模式，不要建立 HTML，請專注完善 implementation_plan.md 工件！」
+* **Q4：打開 `implementation_plan.md` 時，發現檔案樹裡出現了 `package.json`、`src/App.jsx` 或 Vue / React / Vite 等字眼怎麼辦？**  
+  👉 **解答**：千萬不能按 Proceed！這代表 AI 準備過度工程化。請立刻在對話框輸入：  
+  「請停下修正計畫！本專案嚴格禁止使用 React、Vue、Vite 或任何需 npm 編譯的前端框架！請重新更新 `PRD.md` 與 `implementation_plan.md`，改為純靜態的 4 個獨立 `.html` 檔案 ＋ 外部共用 `style.css` ＋ 原生 `script.js` 架構！」
 
 ---
 
 > 💡 **老師的真心話**  
-> 永遠記住：**「磨刀不誤砍柴工」**。這週你花在 PRD 上的每 10 分鐘，將在下週為你省下 2 個小時除錯與重寫代碼的痛苦時間！當你把 PRD 磨到 90 分時，下週 AI 幫你寫出來的代碼就已經成功了 80%！我們下週進入 Phase 2 正式動工！
+> 永遠記住： **「磨刀不誤砍柴工」**。這週你花在 PRD 上的每 10 分鐘，將在下週為你省下 2 個小時除錯與重寫代碼的痛苦時間！當你把 PRD 磨到 90 分時，下週 AI 幫你寫出來的代碼就已經成功了 80%！我們下週進入 Phase 2 正式動工！

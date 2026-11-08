@@ -61,7 +61,6 @@
     flex-direction: column;
     gap: 10px;
     position: relative;
-    transition: all 0.2s;
   }
   .card.highlight {
     background: #f0fdf4;
@@ -83,6 +82,11 @@
     border-color: #fde68a;
     box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
   }
+  .card.rose {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.10);
+  }
   .card-tag {
     font-size: 12px;
     font-weight: 700;
@@ -102,13 +106,6 @@
     color: #475569;
     line-height: 1.6;
   }
-  .card-list {
-    margin: 0;
-    padding-left: 18px;
-    font-size: 13.5px;
-    color: #475569;
-    line-height: 1.6;
-  }
   .arrow {
     display: flex;
     align-items: center;
@@ -118,38 +115,45 @@
     font-weight: bold;
     padding: 0 4px;
   }
+  code {
+    background: rgba(15, 23, 42, 0.06);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+  }
 </style></head><body>
-<div class="container" style="width: 1020px;">
+<div class="container" style="width: 1050px;">
   <div class="header">
     <div class="header-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">⚙️</div>
     <div>
-      <div class="header-title">Phase 2 生成核心工作流：從藍圖到實體代碼</div>
-      <div class="header-subtitle">一鍵批准計畫動工，零複製貼上的代理人自動化工程</div>
+      <div class="header-title">Phase 2 生成核心工作流：從藍圖到多頁原生代碼</div>
+      <div class="header-subtitle">一鍵批准計畫動工，100% 銜接課內 HTML / CSS / JS 知識的自動化工程</div>
     </div>
   </div>
   <div class="flow-row">
     <div class="card">
       <div class="card-tag" style="background: #e2e8f0; color: #475569;">步驟 1</div>
-      <div class="card-title">審核實作計畫</div>
-      <div class="card-desc">在 Artifact 窗格核對 <code>implementation_plan.md</code> 的色票與 Mermaid 區塊圖。</div>
+      <div class="card-title">核對計畫批准動工</div>
+      <div class="card-desc">檢查 <code>implementation_plan.md</code> 確認無前端框架混入，點擊 Proceed 建立 4 個 <code>.html</code> 與共用 <code>style.css</code>。</div>
     </div>
     <div class="arrow">➔</div>
     <div class="card primary">
       <div class="card-tag" style="background: #dbeafe; color: #1e40af;">步驟 2</div>
-      <div class="card-title">點擊 Proceed 動工</div>
-      <div class="card-desc">Antigravity 自動建立 <code>index.html</code>、<code>mystyles.css</code> 與 <code>img/</code> 資料夾。</div>
+      <div class="card-title">原生代碼品管導讀</div>
+      <div class="card-desc">檢視語意化標籤、<code>style.css</code> 的 <code>:root</code> 色票變數與跨頁相對路徑，搭配 Visual Diff 掌握變更。</div>
     </div>
     <div class="arrow">➔</div>
-    <div class="card purple">
-      <div class="card-tag" style="background: #f3e8ff; color: #6b21a8;">步驟 3</div>
-      <div class="card-title">AI 繪圖注入素材</div>
-      <div class="card-desc">調用 <code>generate_image</code> 生成 Hero Banner 與商品卡片圖，取代佔位假圖。</div>
+    <div class="card amber">
+      <div class="card-tag" style="background: #fef3c7; color: #b45309;">步驟 3</div>
+      <div class="card-title">點選 JS 微互動賦能</div>
+      <div class="card-desc">從「微互動點餐單」挑選漢堡選單、FAQ 摺疊或分類篩選，以純 DOM 邏輯寫入 <code>script.js</code>。</div>
     </div>
     <div class="arrow">➔</div>
     <div class="card highlight">
       <div class="card-tag" style="background: #dcfce7; color: #15803d;">步驟 4</div>
-      <div class="card-title">審查 Visual Diff</div>
-      <div class="card-desc">觀察綠色新增與語意標籤，切換至 GitHub Desktop 進行第一階段 Commit。</div>
+      <div class="card-title">AI 繪圖與里程碑提交</div>
+      <div class="card-desc">呼叫 <code>generate_image</code> 產出 4 頁真實商業配圖，驗證跳轉無誤後於 GitHub Desktop 完成 Commit。</div>
     </div>
   </div>
 </div>

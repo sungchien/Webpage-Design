@@ -1,0 +1,178 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px;
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    display: inline-block;
+  }
+  .container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px 40px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.05);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1100px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 16px;
+  }
+  .header-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+  }
+  .header-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .card {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  .card.highlight {
+    background: #f0fdf4;
+    border-color: #86efac;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.12);
+  }
+  .card.primary {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
+  }
+  .card.purple {
+    background: #faf5ff;
+    border-color: #d8b4fe;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.12);
+  }
+  .card.amber {
+    background: #fffbeb;
+    border-color: #fde68a;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
+  }
+  .card.rose {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.10);
+  }
+  .card-tag {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    width: fit-content;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 4px;
+  }
+  code {
+    background: rgba(15, 23, 42, 0.06);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+</style></head><body>
+<div class="container" style="width: 1060px;">
+  <div class="header">
+    <div class="header-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">⚡</div>
+    <div>
+      <div class="header-title">原生 JavaScript 微互動點餐單（免框架賦能 5 選 1～2）</div>
+      <div class="header-subtitle">不必引入複雜 Vue / React，用幾十行純 DOM 語法就能打造媲美商業官網的靈動體驗</div>
+    </div>
+  </div>
+  <div class="menu-grid">
+    <div class="card primary">
+      <div class="card-tag" style="background: #dbeafe; color: #1e40af;">必備保底 ★</div>
+      <div class="card-title" style="font-size: 15px;">📱 漢堡選單開合</div>
+      <div class="card-desc" style="font-size: 13px;">
+        手機版點擊 <code>☰</code> 圖示時，透過 <code>classList.toggle</code> 平滑展開或收合導覽列。
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="background: #fef3c7; color: #b45309;">推薦選配 A</div>
+      <div class="card-title" style="font-size: 15px;">💬 FAQ 摺疊手風琴</div>
+      <div class="card-desc" style="font-size: 13px;">
+        適合服務／入社頁：點擊常見問題標題才動態展開解答，保持版面清爽俐落。
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="background: #fef3c7; color: #b45309;">推薦選配 B</div>
+      <div class="card-title" style="font-size: 15px;">☕ 分類即時篩選器</div>
+      <div class="card-desc" style="font-size: 13px;">
+        適合菜單／作品頁：點擊「手沖／義式／甜點」標籤，免換頁即時篩選顯示對應卡片。
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="background: #fef3c7; color: #b45309;">推薦選配 C</div>
+      <div class="card-title" style="font-size: 15px;">🌙 日夜間氛圍切換</div>
+      <div class="card-desc" style="font-size: 13px;">
+        點擊切換深淺色主題變數，搭配 <code>localStorage</code> 跨頁記住訪客的閱讀偏好。
+      </div>
+    </div>
+    <div class="card highlight">
+      <div class="card-tag" style="background: #dcfce7; color: #15803d;">推薦選配 D</div>
+      <div class="card-title" style="font-size: 15px;">✉️ 表單驗證與回饋</div>
+      <div class="card-desc" style="font-size: 13px;">
+        適合聯絡預約頁：檢查必填欄位並攔截預設重整，彈出溫暖的預約成功確認訊息。
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>
